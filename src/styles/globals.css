@@ -1,0 +1,424 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles to prevent all default browser behaviors */
+* {
+  @apply focus:outline-none focus:ring-0;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Enhanced Card Styles with 3D effects */
+.card-3d,
+[class*="card"],
+[class*="Card"] {
+  @apply select-none transform-gpu;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  touch-action: manipulation;
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Super smooth hover animations */
+.card-3d:hover,
+[class*="card"]:hover,
+[class*="Card"]:hover {
+  @apply transform-gpu;
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Enhanced touch interactions */
+@media (hover: none) {
+  .card-3d,
+  [class*="card"],
+  [class*="Card"],
+  button,
+  a,
+  [role="button"] {
+    @apply transform-gpu active:scale-95;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .card-3d:active,
+  [class*="card"]:active,
+  [class*="Card"]:active {
+    @apply scale-95;
+    transform: scale(0.95) translateY(0);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Custom focus styles for better accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark;
+}
+
+/* Smooth scrolling with momentum */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Enhanced button styles */
+button {
+  @apply transform-gpu;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+button:active {
+  @apply scale-95;
+  transform: scale(0.95) translateY(2px);
+}
+
+/* Enhanced link styles */
+a {
+  @apply transform-gpu;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, color;
+}
+
+/* Glassmorphism effect */
+.glass {
+  @apply bg-white/10 dark:bg-black/10 backdrop-blur-lg;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  @apply bg-white/20 dark:bg-black/20;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shine effect */
+@keyframes shine {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shine {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shine 3s infinite;
+}
+
+/* Enhanced mobile interactions */
+@media (hover: none) {
+  .card-3d,
+  [class*="card"],
+  [class*="Card"],
+  section {
+    @apply transform-gpu;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .card-3d:active,
+  [class*="card"]:active,
+  [class*="Card"]:active,
+  section:active {
+    @apply scale-95;
+    transform: scale(0.95) translateY(0);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Enhanced swipe animations */
+  .swipe-effect {
+    @apply transform-gpu;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .swipe-effect:active {
+    @apply scale-95;
+    transform: scale(0.95) translateY(0);
+  }
+
+  /* Smooth momentum scrolling */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+
+  /* Enhanced touch feedback */
+  .touch-feedback {
+    @apply transform-gpu active:scale-95;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  /* Prevent unwanted scrolling */
+  .no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* 3D tilt effect */
+.tilt {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+.tilt:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Smooth transition for all elements */
+* {
+  @apply transition-all duration-300;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors;
+}
+
+/* Remove blue highlight on mobile */
+@media (hover: none) {
+  * {
+    -webkit-tap-highlight-color: transparent !important;
+  }
+}
+
+/* Remove default button styles */
+button {
+  @apply appearance-none bg-transparent border-0 p-0;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Remove default link styles */
+a {
+  @apply no-underline;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Remove default input styles */
+input,
+textarea,
+select {
+  @apply appearance-none;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  @apply list-none p-0 m-0;
+}
+
+/* Remove default margin and padding */
+body {
+  @apply m-0 p-0;
+}
+
+/* Improve dark mode transitions */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Remove default focus styles from form elements */
+input:focus,
+textarea:focus,
+select:focus {
+  @apply outline-none ring-0;
+}
+
+/* Remove default button focus styles */
+button:focus {
+  @apply outline-none ring-0;
+}
+
+/* Remove default link focus styles */
+a:focus {
+  @apply outline-none ring-0;
+}
+
+/* Remove default image drag */
+img {
+  @apply select-none;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* Remove default text selection color */
+::selection {
+  @apply bg-primary/20 text-primary;
+}
+
+/* Remove default focus styles from all elements */
+*:focus {
+  @apply outline-none ring-0;
+}
+
+/* Remove default focus styles from all elements in dark mode */
+.dark *:focus {
+  @apply outline-none ring-0;
+}
+
+/* Remove default focus styles from all elements in light mode */
+.light *:focus {
+  @apply outline-none ring-0;
+}
+
+/* Remove default focus styles from all elements in any theme */
+[data-theme] *:focus {
+  @apply outline-none ring-0;
+}
+
+/* Enhanced violet background effects with mobile support */
+.experience-section,
+.education-section {
+  @apply relative overflow-hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(217, 70, 239, 0.1) 100%
+  );
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.experience-section::before,
+.education-section::before {
+  content: '';
+  @apply absolute inset-0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(168, 85, 247, 0.1) 25%,
+    rgba(217, 70, 239, 0.05) 50%,
+    transparent 70%
+  );
+  animation: pulse 8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.experience-section::after,
+.education-section::after {
+  content: '';
+  @apply absolute inset-0;
+  background: linear-gradient(
+    45deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(217, 70, 239, 0.1) 100%
+  );
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: float 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Enhanced mobile animations */
+@media (hover: none) {
+  .experience-section,
+  .education-section {
+    @apply transform-gpu;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .experience-section:active,
+  .education-section:active {
+    @apply scale-95;
+    transform: scale(0.95) translateY(0);
+  }
+
+  /* Smooth momentum scrolling for sections */
+  section {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Enhanced violet glow effect with mobile support */
+.violet-glow {
+  @apply relative;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(217, 70, 239, 0.1) 100%
+  );
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.violet-glow::before {
+  content: '';
+  @apply absolute inset-0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(139, 92, 246, 0.2) 0%,
+    rgba(168, 85, 247, 0.15) 25%,
+    rgba(217, 70, 239, 0.1) 50%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  animation: pulse 8s ease-in-out infinite;
+  will-change: transform, opacity;
+} 
