@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Animated Portfolio
 
 A modern, interactive portfolio website built with React, Three.js, and Framer Motion. This portfolio showcases your work with stunning animations and 3D elements, featuring a custom cursor, smooth page transitions, and responsive design.
@@ -320,3 +321,6 @@ Barathraj S
 - React Typed for text animations
 - Lucide React for beautiful icons
 - Inter & JetBrains Mono for typography 
+=======
+# barathraj_portfolio
+>>>>>>> ba6466e0434ba13eb6fc921e13a38010d4634ac9
