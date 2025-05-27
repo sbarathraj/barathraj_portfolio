@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowDown, Github, Linkedin, Twitter, Youtube, Instagram, ArrowRight } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Twitter, Youtube, Instagram, ArrowRight, Code, Sparkles, Star } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import ParticleBackground from '../components/ParticleBackground';
+import ShineButton from '../components/ShineButton';
 // @ts-ignore: No types for react-typed
 import { ReactTyped as Typed } from 'react-typed';
 
@@ -12,39 +13,112 @@ const socialLinks = [
     icon: Github, 
     href: 'https://github.com/sbarathraj', 
     label: 'GitHub',
-    color: 'text-[#333] dark:text-[#fff]'
+    color: 'text-[#333] dark:text-[#fff]',
+    gradient: 'from-gray-700 to-gray-900'
   },
   { 
     icon: Linkedin, 
     href: 'https://www.linkedin.com/in/sbarathraj/', 
     label: 'LinkedIn',
-    color: 'text-[#0077B5] dark:text-[#0077B5]'
+    color: 'text-[#0077B5] dark:text-[#0077B5]',
+    gradient: 'from-blue-500 to-blue-700'
   },
   { 
     icon: Twitter, 
     href: 'https://x.com/BarathNft', 
     label: 'Twitter',
-    color: 'text-[#1DA1F2] dark:text-[#1DA1F2]'
+    color: 'text-[#1DA1F2] dark:text-[#1DA1F2]',
+    gradient: 'from-blue-400 to-blue-600'
   },
   { 
     icon: Youtube, 
     href: 'https://www.youtube.com/@barathrajs7498', 
     label: 'YouTube',
-    color: 'text-[#FF0000] dark:text-[#FF0000]'
+    color: 'text-[#FF0000] dark:text-[#FF0000]',
+    gradient: 'from-red-500 to-red-700'
   },
   { 
     icon: Instagram, 
     href: 'https://www.instagram.com/barathraj_here/', 
     label: 'Instagram',
-    color: 'text-[#E4405F] dark:text-[#E4405F]'
+    color: 'text-[#E4405F] dark:text-[#E4405F]',
+    gradient: 'from-pink-500 to-purple-500'
   },
 ];
+
+// Animation variants
+const floatingAnimation = {
+  initial: { y: 0 },
+  animate: {
+    y: [-10, 10, -10],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const jumpingAnimation = {
+  initial: { y: 0 },
+  animate: {
+    y: [-5, 5, -5],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const nameTextAnimation = {
+  initial: { 
+    opacity: 0,
+    scale: 0.5,
+    y: 50
+  },
+  animate: { 
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.4, 0, 0.2, 1]
+    }
+  }
+};
+
+const glowAnimation = {
+  initial: { opacity: 0.5 },
+  animate: {
+    opacity: [0.5, 1, 0.5],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const rotateAnimation = {
+  initial: { rotate: 0 },
+  animate: {
+    rotate: 360,
+    transition: {
+      duration: 20,
+      repeat: Infinity,
+      ease: "linear"
+    }
+  }
+};
 
 const HeroSection: React.FC = () => {
   const { setActiveSection } = useSection();
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.5 });
-  const imageCardRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   useEffect(() => {
     if (inView) {
@@ -84,179 +158,220 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section
+    <motion.section
       ref={ref}
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen relative flex items-center justify-center py-20 overflow-hidden"
+      initial="hidden"
+      animate="visible"
     >
-      {/* Animated background */}
-      <div className="animated-bg" />
+      {/* Enhanced Particle Background */}
+      <ParticleBackground />
 
-      {/* Enhanced Particle background */}
-      <ParticleBackground id="hero-particles" />
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ y }}
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-secondary/20 to-accent/20 rounded-full blur-3xl"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '2s', y }}
+      />
 
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent animate-pulse-slow" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background-light dark:to-background-dark" />
-      
-      {/* Floating 3D orbs and cubes */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-accent/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
-      {/* 3D cube using CSS */}
-      <div className="absolute left-10 top-1/2 w-16 h-16 animate-spin-slow" style={{ perspective: '600px' }}>
-        <div style={{
-          width: '100%',
-          height: '100%',
-          background: 'linear-gradient(135deg, var(--accent) 40%, var(--secondary) 100%)',
-          borderRadius: '8px',
-          boxShadow: '0 8px 32px 0 rgba(162,89,247,0.2)',
-          transform: 'rotateY(30deg) rotateX(20deg)',
-        }} />
-      </div>
+      {/* Decorative Elements */}
+      <motion.div
+        className="absolute right-10 top-1/4 w-16 h-16"
+        variants={rotateAnimation}
+        initial="initial"
+        animate="animate"
+      >
+        <div className="w-full h-full bg-gradient-to-r from-primary/30 to-secondary/30 rounded-lg transform rotate-45" />
+      </motion.div>
 
-      <div className="container mx-auto px-6 z-10 py-24 md:py-32 flex flex-col md:flex-row items-center gap-12">
-        {/* 3D Animated Image Card */}
-        <motion.div
-          ref={imageCardRef}
-          className="card-3d bg-white/80 dark:bg-background-dark/80 shadow-xl rounded-2xl overflow-hidden w-64 h-80 flex-shrink-0 flex items-center justify-center relative group focus:outline-none focus:ring-0"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          whileHover={{ scale: 1.07, rotateY: 10, rotateX: 10 }}
-          whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }}
-          style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
-        >
-          <img
-            src="/src/assets/Coat Professional.jpg"
-            alt="Barathraj S"
-            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-            style={{ boxShadow: '0 8px 32px 0 rgba(138,43,226,0.2)' }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-4 text-white text-center text-lg font-semibold">
-            Barathraj S
-          </div>
-        </motion.div>
+      <motion.div
+        className="absolute left-10 bottom-1/4 w-12 h-12"
+        variants={rotateAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '2s' }}
+      >
+        <div className="w-full h-full bg-gradient-to-r from-secondary/30 to-accent/30 rounded-full" />
+      </motion.div>
 
+      {/* Floating Icons */}
+      <motion.div
+        className="absolute left-1/4 top-1/3"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+      >
+        <Code size={24} className="text-primary/30" />
+      </motion.div>
+      <motion.div
+        className="absolute right-1/4 bottom-1/3"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '1s' }}
+      >
+        <Sparkles size={24} className="text-secondary/30" />
+      </motion.div>
+      <motion.div
+        className="absolute left-1/3 bottom-1/4"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '1.5s' }}
+      >
+        <Star size={24} className="text-accent/30" />
+      </motion.div>
+
+      <div className="container mx-auto px-6 relative" style={{ zIndex: 1 }}>
         <motion.div
           className="max-w-3xl mx-auto text-center md:text-left"
           variants={container}
           initial="hidden"
           animate={controls}
+          style={{ opacity }}
         >
           <motion.h1 
             className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
             variants={item}
           >
-            <span className="gradient-text animate-gradient block mb-2">
-              Hi, I'm Barathraj S
-            </span>
-            <motion.span
-              className="block text-xl md:text-2xl font-semibold gradient-text animate-gradient drop-shadow-lg"
-              style={{ 
-                background: 'linear-gradient(45deg, #14b8a6, #8a2be2)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            <motion.span 
+              className="gradient-text animate-gradient block mb-2"
+              variants={nameTextAnimation}
+              initial="initial"
+              animate="animate"
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 }
               }}
+            >
+              Hi, I'm Barathraj S
+            </motion.span>
+            <motion.div
+              className="text-xl md:text-2xl font-semibold"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7, type: 'spring', stiffness: 60 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
             >
-              Software Engineer | Full Stack Developer | Tech Enthusiast
-            </motion.span>
+              <Typed
+                strings={[
+                  "Software Engineer",
+                  "Full Stack Developer",
+                  "Tech Enthusiast",
+                  "Problem Solver"
+                ]}
+                typeSpeed={50}
+                backSpeed={30}
+                loop
+                className="gradient-text animate-gradient"
+              />
+            </motion.div>
           </motion.h1>
 
           <motion.p 
             className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 leading-relaxed"
             variants={item}
           >
-            Turning ideas into scalable applications with clean code, modern UI, and efficient backends.
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.8 }}
+            >
+              Turning ideas into scalable applications with clean code, modern UI, and efficient backends.
+            </motion.span>
           </motion.p>
 
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-12"
             variants={item}
           >
-            <button 
+            <ShineButton
               onClick={scrollToAbout}
-              className="relative overflow-hidden px-8 py-3 rounded-xl bg-primary text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 group focus:outline-none focus:ring-0"
-              style={{ minWidth: 44, minHeight: 44 }}
-              type="button"
-              tabIndex={0}
-              aria-label="Explore My Work"
+              variant="primary"
+              ariaLabel="Explore My Work"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-              <span className="flex items-center justify-center gap-2 relative z-10">
+              <motion.span 
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Explore My Work
-                <ArrowDown size={18} className="group-hover:animate-bounce" />
-              </span>
-            </button>
+                <motion.div
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowDown size={18} />
+                </motion.div>
+              </motion.span>
+            </ShineButton>
 
-            <button 
+            <ShineButton
               onClick={() => {
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="relative overflow-hidden px-8 py-3 rounded-xl border-2 border-primary text-primary font-medium transition-all duration-300 hover:bg-primary/10 group focus:outline-none focus:ring-0"
-              style={{ minWidth: 44, minHeight: 44 }}
-              type="button"
-              tabIndex={0}
-              aria-label="Get In Touch"
+              variant="outline"
+              ariaLabel="Get In Touch"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-              <span className="flex items-center justify-center gap-2 relative z-10">
+              <motion.span 
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Get In Touch
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight size={18} />
+                </motion.div>
+              </motion.span>
+            </ShineButton>
           </motion.div>
 
           <motion.div 
             className="flex justify-center md:justify-start space-x-5"
             variants={item}
           >
-            {socialLinks.map(({ icon: Icon, href, label, color }, index) => (
+            {socialLinks.map(({ icon: Icon, href, label, color, gradient }, index) => (
               <motion.a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${color} transition-colors duration-300 focus:outline-none focus:ring-0`}
-                whileHover={{ y: -5, scale: 1.1 }}
-                whileTap={{ scale: 0.9, boxShadow: '0 0 0 4px var(--primary)' }}
-                style={{ minWidth: 44, minHeight: 44, willChange: 'transform, opacity' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                aria-label={label}
+                className={`relative p-2 rounded-lg ${color} transition-all duration-300`}
+                variants={jumpingAnimation}
+                initial="initial"
+                animate="animate"
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: 360,
+                }}
+                whileTap={{ scale: 0.9 }}
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <Icon size={20} className="hover:animate-bounce-slow" />
+                <motion.div
+                  className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-lg opacity-0 transition-opacity duration-300`}
+                  whileHover={{ opacity: 0.2 }}
+                />
+                <Icon size={20} className="relative z-10" />
               </motion.a>
             ))}
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Enhanced scroll down indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 1,
-          repeat: Infinity,
-          repeatType: 'reverse',
-        }}
-      >
-        <div className="relative">
-          <ArrowDown size={30} className="text-primary animate-bounce" />
-          <div className="absolute inset-0 bg-primary/20 rounded-full blur-lg animate-pulse-slow" />
-        </div>
-      </motion.div>
-    </section>
+    </motion.section>
   );
 };
 

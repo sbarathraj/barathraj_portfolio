@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading } from '../components/AnimatedText';
-import AnimatedButton from '../components/AnimatedButton';
+import ShineButton from '../components/ShineButton';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import emailjs from '@emailjs/browser';
 
@@ -250,18 +250,22 @@ const ContactSection: React.FC = () => {
                   )}
                 </div>
                 {/* Submit button */}
-                <motion.div whileTap={{ scale: 0.96 }} style={{ minWidth: 44, minHeight: 44 }}>
-                  <AnimatedButton
+                <div className="mt-4">
+                  <ShineButton
                     type="submit"
-                    className="w-full professional-button-primary mt-4"
+                    variant="primary"
                     disabled={isSubmitting}
+                    className="w-full"
+                    ariaLabel="Send Message"
                   >
-                    {isSubmitting && (
-                      <Loader2 className="animate-spin mr-2" size={18} />
-                    )}
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </AnimatedButton>
-                </motion.div>
+                    <span className="flex items-center justify-center gap-2">
+                      {isSubmitting && (
+                        <Loader2 className="animate-spin" size={18} />
+                      )}
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </span>
+                  </ShineButton>
+                </div>
               </form>
             )}
           </motion.div>

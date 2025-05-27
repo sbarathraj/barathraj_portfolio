@@ -1,105 +1,122 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useAnimation, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, Database, Layout, Settings, Cpu, PenTool, Github } from 'lucide-react';
+import { Code, Database, Cloud, GitBranch, Brain, Settings } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading } from '../components/AnimatedText';
-import ProgressBar from '../components/ProgressBar';
 import useScrollAnimation from '../hooks/useScrollAnimation';
+import TechIcon from '../components/TechIcon';
 
-// Professional skill categories and skills
+// Animation variants for floating icons
+const floatingIconVariants: Variants = {
+  initial: { y: 0 },
+  animate: {
+    y: [-8, 8, -8],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+// Animation variants for jumping icons
+const jumpingIconVariants: Variants = {
+  initial: { y: 0, scale: 1 },
+  animate: {
+    y: [-4, 0],
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 0.6,
+      repeat: Infinity,
+      repeatType: "reverse",
+      ease: "easeOut"
+    }
+  }
+};
+
+// Skill categories with their respective skills
 const skillCategories = [
   {
-    id: 'dsa',
-    title: 'Data Structures & Algorithms',
+    id: 'core',
+    title: 'Core Competencies',
     icon: Code,
+    color: 'primary',
     skills: [
-      { name: 'Arrays', level: 95 },
-      { name: 'Linked Lists', level: 90 },
-      { name: 'Trees', level: 90 },
-      { name: 'Graphs', level: 85 },
-      { name: 'Dynamic Programming', level: 80 },
-      { name: 'Problem Solving', level: 95 },
+      { name: 'Java', percentage: 92 },
+      { name: 'JavaScript', percentage: 88 },
+      { name: 'SQL', percentage: 90 },
+      { name: 'Data Structures & Algorithms', percentage: 85 },
+      { name: 'Spring Boot & Hibernate', percentage: 88 },
+      { name: 'Angular', percentage: 85 },
+      { name: 'REST APIs', percentage: 90 },
     ],
   },
   {
-    id: 'languages',
-    title: 'Languages',
-    icon: PenTool,
-    skills: [
-      { name: 'Java', level: 95 },
-      { name: 'SQL', level: 90 },
-      { name: 'HTML', level: 95 },
-      { name: 'CSS', level: 90 },
-      { name: 'JavaScript', level: 90 },
-      { name: 'TypeScript', level: 85 },
-    ],
-  },
-  {
-    id: 'frameworks',
-    title: 'Frameworks & Libraries',
-    icon: Layout,
-    skills: [
-      { name: 'Spring Boot', level: 90 },
-      { name: 'Hibernate', level: 85 },
-      { name: 'Angular', level: 90 },
-      { name: 'React', level: 90 },
-      { name: 'Bootstrap', level: 85 },
-    ],
-  },
-  {
-    id: 'databases',
-    title: 'Databases',
+    id: 'database',
+    title: 'Database & Backend',
     icon: Database,
+    color: 'secondary',
     skills: [
-      { name: 'MySQL', level: 90 },
-      { name: 'MongoDB', level: 85 },
-      { name: 'Oracle', level: 80 },
-    ],
-  },
-  {
-    id: 'build',
-    title: 'Build Tools',
-    icon: Settings,
-    skills: [
-      { name: 'Maven', level: 90 },
-      { name: 'Gradle', level: 80 },
+      { name: 'MySQL', percentage: 90 },
+      { name: 'MongoDB', percentage: 85 },
+      { name: 'PostgreSQL', percentage: 82 },
+      { name: 'Redis', percentage: 78 },
+      { name: 'Maven', percentage: 88 },
+      { name: 'Gradle', percentage: 82 },
+      { name: 'Microservices Architecture', percentage: 85 },
     ],
   },
   {
     id: 'cloud',
     title: 'Cloud & DevOps',
-    icon: Cpu,
+    icon: Cloud,
+    color: 'accent',
     skills: [
-      { name: 'GitHub Actions', level: 80 },
-      { name: 'Docker (basic)', level: 70 },
+      { name: 'AWS (EC2, S3, RDS)', percentage: 82 },
+      { name: 'Microsoft Azure', percentage: 80 },
+      { name: 'GitHub Actions', percentage: 85 },
+      { name: 'Docker', percentage: 75 },
+      { name: 'Kubernetes', percentage: 72 },
+      { name: 'Jenkins', percentage: 78 },
+      { name: 'CI/CD', percentage: 80 },
     ],
   },
   {
-    id: 'version',
-    title: 'Version Control',
-    icon: Github,
+    id: 'tools',
+    title: 'Tools & Version Control',
+    icon: GitBranch,
+    color: 'primary',
     skills: [
-      { name: 'Git', level: 90 },
-      { name: 'GitHub', level: 90 },
+      { name: 'Git & GitHub', percentage: 92 },
+      { name: 'Postman & Swagger', percentage: 88 },
+      { name: 'VS Code', percentage: 90 },
+      { name: 'Figma', percentage: 75 },
+      { name: 'Netlify & Vercel', percentage: 85 },
     ],
   },
   {
-    id: 'methodologies',
-    title: 'Development Methodologies',
+    id: 'ai',
+    title: 'AI & Emerging Tech',
+    icon: Brain,
+    color: 'secondary',
+    skills: [
+      { name: 'OpenAI API Integration', percentage: 85 },
+      { name: 'ChatGPT Prompt Engineering', percentage: 88 },
+      { name: 'ML Model Integration', percentage: 78 },
+      { name: 'AI Application Development', percentage: 80 },
+    ],
+  },
+  {
+    id: 'practices',
+    title: 'Development Practices',
     icon: Settings,
+    color: 'accent',
     skills: [
-      { name: 'Agile', level: 85 },
-      { name: 'Scrum', level: 80 },
-    ],
-  },
-  {
-    id: 'architecture',
-    title: 'Architectural Patterns',
-    icon: Layout,
-    skills: [
-      { name: 'Microservices', level: 85 },
-      { name: 'REST APIs', level: 90 },
+      { name: 'Agile Methodologies', percentage: 88 },
+      { name: 'Test-Driven Development', percentage: 85 },
+      { name: 'Responsive Web Design', percentage: 90 },
+      { name: 'Cross-Browser Compatibility', percentage: 85 },
     ],
   },
 ];
@@ -120,35 +137,49 @@ const SkillsSection: React.FC = () => {
       id="skills"
       className="py-24 relative overflow-hidden"
     >
-      {/* Animated, colorful background */}
-      <div className="animated-bg" />
-      <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-b from-primary/10 to-transparent rounded-full blur-3xl animate-float" />
+      {/* Enhanced animated background elements */}
+      <motion.div
+        className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/10 rounded-full blur-3xl"
+        variants={floatingIconVariants}
+        initial="initial"
+        animate="animate"
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-secondary/10 rounded-full blur-3xl"
+        variants={floatingIconVariants}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '2s' }}
+      />
+      <motion.div
+        className="absolute left-1/2 top-1/3 w-24 h-24 bg-accent/20 rounded-full blur-2xl"
+        variants={floatingIconVariants}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '4s' }}
+      />
+
+      {/* 3D floating elements */}
       <div className="absolute right-10 top-1/2 w-16 h-16 animate-spin-slow" style={{ perspective: '600px' }}>
         <div style={{
           width: '100%',
           height: '100%',
           background: 'linear-gradient(135deg, var(--accent) 40%, var(--secondary) 100%)',
           borderRadius: '8px',
-          boxShadow: '0 8px 32px 0 rgba(138,43,226,0.2)',
+          boxShadow: '0 8px 32px 0 rgba(162,89,247,0.2)',
           transform: 'rotateY(30deg) rotateX(20deg)',
         }} />
       </div>
-      <div className="absolute left-10 top-1/3 w-24 h-24 bg-secondary/20 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute right-1/4 bottom-10 w-32 h-32 bg-accent/20 rounded-full blur-2xl animate-float" style={{ animationDelay: '4s' }} />
 
       <div className="container mx-auto px-6">
         <AnimatedHeading
-          text="My Skills"
+          text="Technical Skills"
           className="text-3xl md:text-5xl font-bold mb-16 text-center gradient-text animate-gradient"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
-            <SkillCategoryCard 
-              key={category.id} 
-              category={category} 
-              index={index} 
-            />
+            <SkillCategory key={category.id} category={category} index={index} />
           ))}
         </div>
       </div>
@@ -156,25 +187,22 @@ const SkillsSection: React.FC = () => {
   );
 };
 
-interface SkillCategoryCardProps {
+interface SkillCategoryProps {
   category: {
     id: string;
     title: string;
     icon: React.ElementType;
-    skills: { name: string; level: number }[];
+    color: string;
+    skills: Array<{ name: string; percentage: number }>;
   };
   index: number;
 }
 
-const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category, index }) => {
+const SkillCategory: React.FC<SkillCategoryProps> = ({ category, index }) => {
   const { ref, variants, controls } = useScrollAnimation({
     delay: index * 0.1,
   });
-  
   const Icon = category.icon;
-  const borderColor = index % 3 === 0 ? 'border-primary/70' : index % 3 === 1 ? 'border-secondary/70' : 'border-accent/70';
-  const iconColor = index % 3 === 0 ? 'text-primary' : index % 3 === 1 ? 'text-secondary' : 'text-accent';
-  const cardBg = 'glass-effect';
 
   return (
     <motion.div
@@ -182,29 +210,116 @@ const SkillCategoryCard: React.FC<SkillCategoryCardProps> = ({ category, index }
       variants={variants.fadeInUp}
       initial="hidden"
       animate={controls}
-      className={`card-3d ${cardBg} p-6 border-2 ${borderColor} shadow-lg rounded-xl hover:shadow-glow transition-all duration-300 group`}
-      whileHover={{ scale: 1.07, rotateY: 10, rotateX: 10 }}
-      whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }}
-      style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
+      className="card-3d glass-effect p-6 border-2 border-primary/20 shadow-lg rounded-xl hover:shadow-glow transition-all duration-300"
+      whileHover={{ scale: 1.02, rotateY: 5, rotateX: 5 }}
+      style={{ willChange: 'transform, opacity' }}
     >
-      <div className="flex items-center mb-6">
-        <div className={`w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 ${iconColor}`}>
-          <Icon size={28} className={`animate-bounce-slow ${iconColor}`} />
-        </div>
-        <h3 className="text-xl font-bold gradient-text animate-gradient drop-shadow-md">{category.title}</h3>
+      <div className="flex items-center gap-4 mb-6">
+        <motion.div
+          className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${category.color}/20 border-2 border-${category.color}/70`}
+          variants={jumpingIconVariants}
+          initial="initial"
+          animate="animate"
+          whileHover={{ scale: 1.2, rotate: 360 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Icon size={24} className={`text-${category.color}`} />
+        </motion.div>
+        <h3 className="text-xl font-bold gradient-text animate-gradient">{category.title}</h3>
       </div>
-      <div>
+
+      <div className="space-y-4">
         {category.skills.map((skill, skillIndex) => (
-          <div key={skill.name} className="mb-2">
-            <span className="font-semibold gradient-text animate-gradient text-base drop-shadow-sm">{skill.name}</span>
-            <ProgressBar
-              label=""
-              percentage={skill.level}
-              delay={0.2 + skillIndex * 0.1}
-              color={index % 3 === 0 ? 'primary' : index % 3 === 1 ? 'secondary' : 'accent'}
-            />
-          </div>
+          <SkillBar
+            key={skill.name}
+            skill={skill}
+            delay={index * 0.2 + skillIndex * 0.1}
+          />
         ))}
+      </div>
+    </motion.div>
+  );
+};
+
+interface SkillBarProps {
+  skill: {
+    name: string;
+    percentage: number;
+  };
+  delay: number;
+}
+
+const SkillBar: React.FC<SkillBarProps> = ({ skill, delay }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      setIsVisible(true);
+    }
+  }, [inView]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay }}
+      className="space-y-2"
+    >
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <motion.div
+            variants={jumpingIconVariants}
+            initial="initial"
+            animate="animate"
+            style={{ animationDelay: `${delay * 0.1}s` }}
+          >
+            <TechIcon name={skill.name} size={18} />
+          </motion.div>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            {skill.name}
+          </span>
+        </div>
+        <span className="text-sm font-semibold text-primary">
+          {isVisible ? (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: delay + 0.5 }}
+            >
+              {skill.percentage}%
+            </motion.span>
+          ) : '0%'}
+        </span>
+      </div>
+      <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <motion.div
+          className="h-full bg-gradient-to-r from-primary via-secondary to-accent rounded-full relative"
+          initial={{ width: '0%' }}
+          animate={isVisible ? { width: `${skill.percentage}%` } : {}}
+          transition={{
+            duration: 1.5,
+            delay: delay + 0.2,
+            ease: 'easeOut',
+          }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-white/20"
+            animate={{
+              x: ['0%', '100%'],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          />
+        </motion.div>
       </div>
     </motion.div>
   );

@@ -1,10 +1,48 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FileDown, Award, Code } from 'lucide-react';
+import { FileDown, Award, Code, Sparkles, Brain, Rocket } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading, AnimatedParagraph } from '../components/AnimatedText';
 import useScrollAnimation from '../hooks/useScrollAnimation';
+import ShineButton from '../components/ShineButton';
+
+// Animation variants
+const floatingAnimation = {
+  initial: { y: 0 },
+  animate: {
+    y: [-10, 10, -10],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const pulseAnimation = {
+  initial: { scale: 1 },
+  animate: {
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const rotateAnimation = {
+  initial: { rotate: 0 },
+  animate: {
+    rotate: 360,
+    transition: {
+      duration: 20,
+      repeat: Infinity,
+      ease: "linear"
+    }
+  }
+};
 
 const AboutSection: React.FC = () => {
   const { setActiveSection } = useSection();
@@ -21,208 +59,288 @@ const AboutSection: React.FC = () => {
     window.open('https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk', '_blank');
   };
 
-  // Animation variants
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  };
-  const staggerContainer = {
-    visible: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
-  };
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
-
   return (
     <motion.section
       ref={sectionRef}
       id="about"
-      className="py-32 md:py-40 relative overflow-hidden flex flex-col justify-center"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      className="py-20 relative overflow-hidden flex flex-col justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
     >
-      {/* Animated, colorful background */}
-      <div className="animated-bg" />
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/10 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-secondary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute left-1/2 top-1/3 w-24 h-24 bg-accent/20 rounded-full blur-2xl animate-float" style={{ animationDelay: '4s' }} />
-      {/* 3D cube using CSS */}
-      <div className="absolute right-10 top-1/2 w-16 h-16 animate-spin-slow" style={{ perspective: '600px' }}>
-        <div style={{
-          width: '100%',
-          height: '100%',
-          background: 'linear-gradient(135deg, var(--accent) 40%, var(--secondary) 100%)',
-          borderRadius: '8px',
-          boxShadow: '0 8px 32px 0 rgba(162,89,247,0.2)',
-          transform: 'rotateY(30deg) rotateX(20deg)',
-        }} />
-      </div>
+      {/* Enhanced animated background elements */}
+      <motion.div
+        className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-secondary/20 to-accent/20 rounded-full blur-3xl"
+        variants={floatingAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '2s' }}
+      />
+      <motion.div
+        className="absolute left-1/2 top-1/3 w-24 h-24 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-full blur-2xl"
+        variants={pulseAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '4s' }}
+      />
+
+      {/* Rotating geometric shapes */}
+      <motion.div
+        className="absolute right-10 top-1/4 w-16 h-16"
+        variants={rotateAnimation}
+        initial="initial"
+        animate="animate"
+      >
+        <div className="w-full h-full bg-gradient-to-r from-primary/30 to-secondary/30 rounded-lg transform rotate-45" />
+      </motion.div>
+
+      <motion.div
+        className="absolute left-10 bottom-1/4 w-12 h-12"
+        variants={rotateAnimation}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: '2s' }}
+      >
+        <div className="w-full h-full bg-gradient-to-r from-secondary/30 to-accent/30 rounded-full" />
+      </motion.div>
 
       <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto flex flex-col gap-16 md:gap-24 justify-center">
+        <div className="max-w-6xl mx-auto flex flex-col gap-8 justify-center">
+          {/* Section Header with Enhanced Styling */}
           <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center space-y-3"
           >
+            <motion.div
+              className="inline-block"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="text-sm uppercase tracking-wider text-primary font-semibold">
+                Get to know me
+              </div>
+            </motion.div>
             <AnimatedHeading
               text="About Me"
-              className="text-3xl md:text-5xl font-bold mb-16 text-center gradient-text animate-gradient"
+              className="text-4xl md:text-6xl font-bold gradient-text animate-gradient"
             />
+            <motion.div 
+              className="max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              <p className="text-gray-600 dark:text-gray-300 text-lg">
+                Passionate about creating impactful software solutions
+              </p>
+            </motion.div>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Left: Info and Resume */}
-            <motion.div className="space-y-6" variants={staggerContainer}>
-              <motion.div variants={fadeInUp}>
-                <AnimatedParagraph
-                  text="I'm Barathraj S., a passionate and performance-driven Software Engineer from Tamil Nadu, India. I specialize in designing and developing end-to-end solutions that blend intuitive user interfaces with powerful back-end systems."
-                  className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-                  delay={0.1}
+            {/* Left Column: Image and Quick Stats */}
+            <motion.div className="md:col-span-5 space-y-4">
+              {/* Profile Image */}
+              <motion.div
+                className="w-[320px] h-[400px] relative group mx-auto md:mx-0 mb-4"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Professional gradient border */}
+                <motion.div 
+                  className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-75 group-hover:opacity-100 blur transition-all duration-300"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.75 }}
+                  transition={{ duration: 0.5 }}
                 />
-              </motion.div>
-              <motion.div variants={fadeInUp}>
-                <AnimatedParagraph
-                  text="With expertise in Java, Spring Boot, and Angular, I focus on creating scalable applications that deliver exceptional user experiences. I'm currently working as a Software Engineer at Kuwy Technology Service Pvt Ltd."
-                  className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-                  delay={0.2}
+                
+                {/* Background glow effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
                 />
-              </motion.div>
-              <motion.div variants={fadeInUp}>
-                <AnimatedParagraph
-                  text="I hold a B.Tech in Information Technology from Sri Manakula Vinayagar Engineering College, Puducherry, where I graduated with a CGPA of 7.77."
-                  className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-                  delay={0.3}
-                />
-              </motion.div>
-              <motion.div variants={fadeInUp}>
-                <motion.button
-                  className="professional-button-primary group"
-                  onClick={handleResumeDownload}
-                  style={{ minWidth: 44, minHeight: 44 }}
-                  type="button"
-                  tabIndex={0}
-                  aria-label="Download Resume"
-                  whileTap={{ scale: 0.96 }}
+                
+                {/* Image container */}
+                <motion.div
+                  className="relative w-full h-full overflow-hidden rounded-2xl border border-white/10 shadow-lg bg-gradient-to-b from-gray-900/10 to-black/30"
                 >
-                  <span className="flex items-center gap-2">
-                    <FileDown size={20} /> Download Resume
-                  </span>
-                </motion.button>
+                  <img
+                    src="https://ik.imagekit.io/barthraj/barathrajcoat.jpg?updatedAt=1748329958725"
+                    alt="Barathraj S"
+                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
+                    loading="eager"
+                    style={{
+                      objectPosition: '50% 15%'
+                    }}
+                  />
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px]" 
+                  />
+                </motion.div>
               </motion.div>
-              {/* DSA/Philosophy highlight */}
-              <motion.div variants={fadeInUp} className="glass-effect p-4 rounded-xl mt-4 shadow-lg flex items-center gap-4" whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }} style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}>
-                <Code size={32} className="text-primary animate-bounce-slow" />
-                <div>
-                  <div className="font-semibold text-lg text-primary mb-1">DSA Enthusiast</div>
-                  <div className="text-gray-700 dark:text-gray-200 text-sm">
-                    I consistently practice DSA problems on Leetcode and enjoy optimizing every solution for time and space.
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div variants={fadeInUp} className="glass-effect p-4 rounded-xl mt-2 shadow-lg flex items-center gap-4" whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--secondary)' }} style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}>
-                <Award size={32} className="text-secondary animate-pulse-slow" />
-                <div>
-                  <div className="font-semibold text-lg text-secondary mb-1">Philosophy</div>
-                  <div className="text-gray-700 dark:text-gray-200 text-sm italic">
-                    "Code is not just instructions to a machine; it's a medium to solve human problems."
-                  </div>
-                </div>
-              </motion.div>
+
+              {/* Quick Stats in Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                <motion.div
+                  className="glass-effect p-6 rounded-xl flex flex-col items-center text-center shadow-lg hover:shadow-glow transition-all duration-300"
+                  whileHover={{ scale: 1.02, rotateY: 5 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <motion.div
+                    className="text-3xl font-bold gradient-text mb-1"
+                    variants={pulseAnimation}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    100+
+                  </motion.div>
+                  <div className="text-sm text-gray-600 dark:text-gray-300">LeetCode Problems</div>
+                </motion.div>
+
+                <motion.div
+                  className="glass-effect p-6 rounded-xl flex flex-col items-center text-center shadow-lg hover:shadow-glow transition-all duration-300"
+                  whileHover={{ scale: 1.02, rotateY: -5 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <motion.div
+                    className="text-3xl font-bold text-secondary mb-1"
+                    variants={pulseAnimation}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    1+ Year
+                  </motion.div>
+                  <div className="text-sm text-gray-600 dark:text-gray-300">Professional Experience</div>
+                </motion.div>
+              </div>
             </motion.div>
 
-            {/* Right: Coding/Experience Stats & Relationship Cards */}
-            <motion.div className="flex flex-col gap-4 w-full items-center md:items-start" variants={staggerContainer}>
-              <motion.div className="glass-effect p-4 rounded-xl flex flex-col items-center shadow-lg" variants={fadeInUp}>
-                <div className="text-3xl font-bold gradient-text">100+</div>
-                <div className="text-sm text-gray-700 dark:text-gray-200">LeetCode Problems</div>
-              </motion.div>
-              <motion.div className="glass-effect p-4 rounded-xl flex flex-col items-center shadow-lg" variants={fadeInUp}>
-                <div className="text-3xl font-bold text-secondary">1+ Year</div>
-                <div className="text-sm text-gray-700 dark:text-gray-200">Professional Experience</div>
-              </motion.div>
-              {/* Removed relationship/connection cards for a cleaner layout */}
+            {/* Right Column: Main Content */}
+            <motion.div className="md:col-span-7 space-y-4">
+              {/* Bio Paragraphs */}
+              <div className="space-y-3">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <AnimatedParagraph
+                    text="I'm Barathraj S, a passionate and performance-driven Software Engineer from Tamil Nadu, India. I specialize in designing and developing end-to-end solutions that blend intuitive user interfaces with powerful back-end systems."
+                    className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                    delay={0.1}
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <AnimatedParagraph
+                    text="With expertise in Java, Spring Boot, and Angular, I focus on creating scalable applications that deliver exceptional user experiences. I'm currently working as a Software Engineer at Kuwy Technology Service Pvt Ltd."
+                    className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                    delay={0.2}
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
+                  <AnimatedParagraph
+                    text="I hold a B.Tech in Information Technology from Sri Manakula Vinayagar Engineering College, Puducherry, where I graduated with a CGPA of 7.77."
+                    className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                    delay={0.3}
+                  />
+                </motion.div>
+              </div>
 
-              {/* My Values & Passions Animated Cards */}
+              {/* Download Resume Button */}
               <motion.div
-                className="flex flex-wrap gap-5 mt-12 mb-2 justify-center md:justify-start"
-                variants={staggerContainer}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex justify-start py-2"
               >
-                <motion.div
-                  className="glass-effect px-6 py-5 rounded-2xl flex flex-col items-center shadow-xl min-w-[160px] max-w-xs hover:shadow-glow transition-all duration-300 cursor-pointer"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.09, rotateY: 8, boxShadow: '0 8px 32px 0 rgba(20,184,166,0.18)' }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.7, type: 'spring', bounce: 0.3 }}
-                  style={{ background: 'linear-gradient(135deg, #14b8a6 0%, #a259f7 100%)', color: '#fff' }}
+                <ShineButton
+                  onClick={handleResumeDownload}
+                  variant="primary"
+                  ariaLabel="Download Resume"
+                  className="w-auto"
                 >
-                  <motion.span className="mb-2" animate={{ scale: [1, 1.15, 1], rotate: [0, 10, -10, 0] }} transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}>
-                    <Code size={28} className="text-white drop-shadow-lg" />
+                  <motion.span 
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FileDown size={20} className="animate-bounce-slow" /> 
+                    Download Resume
                   </motion.span>
-                  <span className="font-bold text-lg mb-1">Creativity</span>
-                  <span className="text-sm opacity-90 text-center">I love turning ideas into beautiful, functional products.</span>
-                </motion.div>
-                <motion.div
-                  className="glass-effect px-6 py-5 rounded-2xl flex flex-col items-center shadow-xl min-w-[160px] max-w-xs hover:shadow-glow transition-all duration-300 cursor-pointer"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.09, rotateY: -8, boxShadow: '0 8px 32px 0 rgba(139,92,246,0.18)' }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.7, type: 'spring', bounce: 0.3, delay: 0.1 }}
-                  style={{ background: 'linear-gradient(135deg, #f472b6 0%, #8b5cf6 100%)', color: '#fff' }}
-                >
-                  <motion.span className="mb-2" animate={{ scale: [1, 1.15, 1], rotate: [0, -10, 10, 0] }} transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}>
-                    <Award size={28} className="text-white drop-shadow-lg" />
-                  </motion.span>
-                  <span className="font-bold text-lg mb-1">Collaboration</span>
-                  <span className="text-sm opacity-90 text-center">Great things happen when we build together and share knowledge.</span>
-                </motion.div>
-                <motion.div
-                  className="glass-effect px-6 py-5 rounded-2xl flex flex-col items-center shadow-xl min-w-[160px] max-w-xs hover:shadow-glow transition-all duration-300 cursor-pointer"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.09, rotateY: 8, boxShadow: '0 8px 32px 0 rgba(251,191,36,0.18)' }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.7, type: 'spring', bounce: 0.3, delay: 0.2 }}
-                  style={{ background: 'linear-gradient(135deg, #5eead4 0%, #fbbf24 100%)', color: '#1a1a1a' }}
-                >
-                  <motion.span className="mb-2" animate={{ scale: [1, 1.15, 1], rotate: [0, 10, -10, 0] }} transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}>
-                    <FileDown size={28} className="text-primary drop-shadow-lg" />
-                  </motion.span>
-                  <span className="font-bold text-lg mb-1">Continuous Learning</span>
-                  <span className="text-sm opacity-90 text-center">I'm always exploring new tech and improving my craft.</span>
-                </motion.div>
-                <motion.div
-                  className="glass-effect px-6 py-5 rounded-2xl flex flex-col items-center shadow-xl min-w-[160px] max-w-xs hover:shadow-glow transition-all duration-300 cursor-pointer"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.09, rotateY: -8, boxShadow: '0 8px 32px 0 rgba(20,184,166,0.18)' }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.7, type: 'spring', bounce: 0.3, delay: 0.3 }}
-                  style={{ background: 'linear-gradient(135deg, #a259f7 0%, #14b8a6 100%)', color: '#fff' }}
-                >
-                  <motion.span className="mb-2" animate={{ scale: [1, 1.15, 1], rotate: [0, -10, 10, 0] }} transition={{ repeat: Infinity, duration: 2.6, ease: 'easeInOut' }}>
-                    <Award size={28} className="text-white drop-shadow-lg" />
-                  </motion.span>
-                  <span className="font-bold text-lg mb-1">Building Impact</span>
-                  <span className="text-sm opacity-90 text-center">I strive to create solutions that make a real difference.</span>
-                </motion.div>
+                </ShineButton>
               </motion.div>
+
+              {/* Highlight Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <motion.div
+                  variants={pulseAnimation}
+                  initial="initial"
+                  animate="animate"
+                  className="glass-effect p-4 rounded-xl shadow-lg flex items-start gap-4 hover:shadow-glow transition-all duration-300"
+                  whileHover={{ scale: 1.02, rotateX: 5 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                    className="mt-1"
+                  >
+                    <Code size={28} className="text-primary" />
+                  </motion.div>
+                  <div>
+                    <div className="font-semibold text-lg text-primary mb-2">DSA Enthusiast</div>
+                    <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                      I consistently practice DSA problems on Leetcode and enjoy optimizing every solution for time and space.
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={pulseAnimation}
+                  initial="initial"
+                  animate="animate"
+                  className="glass-effect p-4 rounded-xl shadow-lg flex items-start gap-4 hover:shadow-glow transition-all duration-300"
+                  whileHover={{ scale: 1.02, rotateX: -5 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                    className="mt-1"
+                  >
+                    <Award size={28} className="text-secondary" />
+                  </motion.div>
+                  <div>
+                    <div className="font-semibold text-lg text-secondary mb-2">Philosophy</div>
+                    <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed italic">
+                      "Code is not just instructions to a machine; it's a medium to solve human problems."
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         </div>

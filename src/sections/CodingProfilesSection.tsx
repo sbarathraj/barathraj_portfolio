@@ -5,6 +5,7 @@ import { Code, ExternalLink, Github, Award, TrendingUp, ArrowRight } from 'lucid
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading } from '../components/AnimatedText';
 import useScrollAnimation from '../hooks/useScrollAnimation';
+import ShineButton from '../components/ShineButton';
 
 // Sample coding profile data
 const codingProfiles = [
@@ -175,18 +176,16 @@ const CodingProfileCard: React.FC<CodingProfileCardProps> = ({ profile, index })
         ))}
       </div>
       
-      <motion.button
-        type="button"
-        className={`mt-6 professional-button professional-button-primary inline-flex items-center gap-2`}
-        whileHover={{ x: 5 }}
-        whileTap={{ scale: 0.96 }}
-        style={{ minWidth: 44, minHeight: 44 }}
-        aria-label={`View ${profile.title} profile for @${profile.username}`}
+      <ShineButton
         onClick={() => window.open(profile.link, '_blank', 'noopener,noreferrer')}
+        variant="primary"
+        ariaLabel={`View ${profile.title} profile for @${profile.username}`}
       >
-        View Profile
-        <ArrowRight size={16} className="ml-1" />
-      </motion.button>
+        <span className="flex items-center gap-2">
+          View Profile
+          <ArrowRight size={16} />
+        </span>
+      </ShineButton>
     </motion.div>
   );
 };

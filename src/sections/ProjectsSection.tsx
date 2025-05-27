@@ -5,6 +5,7 @@ import { ExternalLink, Github } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading } from '../components/AnimatedText';
 import useScrollAnimation from '../hooks/useScrollAnimation';
+import ShineButton from '../components/ShineButton';
 
 // Sample project data
 const projects = [
@@ -181,26 +182,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, isSelected, o
         </div>
         {/* Action buttons with professional styles */}
         <div className="flex space-x-3 mt-2">
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="professional-button-primary group flex items-center gap-1 text-sm"
-            style={{ minWidth: 44, minHeight: 44 }}
+          <ShineButton
+            onClick={() => window.open(project.demoUrl, '_blank')}
+            variant="primary"
+            ariaLabel="View Live Demo"
+            className="text-sm"
           >
-            <ExternalLink size={14} />
-            Live Demo
-          </a>
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="professional-button-outline group flex items-center gap-1 text-sm"
-            style={{ minWidth: 44, minHeight: 44 }}
+            <span className="flex items-center gap-1">
+              <ExternalLink size={14} />
+              Live Demo
+            </span>
+          </ShineButton>
+          <ShineButton
+            onClick={() => window.open(project.repoUrl, '_blank')}
+            variant="outline"
+            ariaLabel="View Source Code"
+            className="text-sm"
           >
-            <Github size={14} />
-            Code
-          </a>
+            <span className="flex items-center gap-1">
+              <Github size={14} />
+              Code
+            </span>
+          </ShineButton>
         </div>
       </div>
       {/* Decorative elements */}
