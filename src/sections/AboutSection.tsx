@@ -54,13 +54,14 @@ const AboutSection: React.FC = () => {
     }
   }, [inView, setActiveSection]);
 
-  const handleResumeDownload = (e: React.MouseEvent) => {
+  const handleResumeDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const resumeUrl = 'https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk';
     
-    const newWindow = window.open(resumeUrl, '_blank');
-    if (newWindow) {
-      newWindow.opener = null;
+    try {
+      window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+    } catch (error) {
+      console.error('Error opening resume:', error);
     }
   };
 
@@ -273,14 +274,15 @@ const AboutSection: React.FC = () => {
                   onClick={handleResumeDownload}
                   variant="primary"
                   ariaLabel="Download Resume"
-                  className="w-auto"
+                  className="w-auto transform-none hover:scale-105 transition-transform duration-300"
                 >
                   <motion.span 
                     className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05 }}
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <FileDown size={20} className="animate-bounce-slow" /> 
+                    <FileDown size={20} /> 
                     Download Resume
                   </motion.span>
                 </ShineButton>
