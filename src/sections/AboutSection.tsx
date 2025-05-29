@@ -7,7 +7,6 @@ import { AnimatedHeading, AnimatedParagraph } from '../components/AnimatedText';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import ShineButton from '../components/ShineButton';
 
-// Animation variants
 const floatingAnimation = {
   initial: { y: 0 },
   animate: {
@@ -55,8 +54,14 @@ const AboutSection: React.FC = () => {
     }
   }, [inView, setActiveSection]);
 
-  const handleResumeDownload = () => {
-    window.open('https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk', '_blank');
+  const handleResumeDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const resumeUrl = 'https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk';
+    
+    const newWindow = window.open(resumeUrl, '_blank');
+    if (newWindow) {
+      newWindow.opener = null;
+    }
   };
 
   return (
@@ -68,7 +73,6 @@ const AboutSection: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      {/* Enhanced animated background elements */}
       <motion.div
         className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"
         variants={floatingAnimation}
@@ -90,7 +94,6 @@ const AboutSection: React.FC = () => {
         style={{ animationDelay: '4s' }}
       />
 
-      {/* Rotating geometric shapes */}
       <motion.div
         className="absolute right-10 top-1/4 w-16 h-16"
         variants={rotateAnimation}
@@ -112,7 +115,6 @@ const AboutSection: React.FC = () => {
 
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto flex flex-col gap-8 justify-center">
-          {/* Section Header with Enhanced Styling */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,15 +153,12 @@ const AboutSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Left Column: Image and Quick Stats */}
             <motion.div className="md:col-span-5 space-y-4">
-              {/* Profile Image */}
               <motion.div
                 className="w-[320px] h-[400px] relative group mx-auto md:mx-0 mb-4"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Professional gradient border */}
                 <motion.div 
                   className="absolute -inset-0.5 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-75 group-hover:opacity-100 blur transition-all duration-300"
                   initial={{ opacity: 0 }}
@@ -167,7 +166,6 @@ const AboutSection: React.FC = () => {
                   transition={{ duration: 0.5 }}
                 />
                 
-                {/* Background glow effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"
                   initial={{ opacity: 0 }}
@@ -175,7 +173,6 @@ const AboutSection: React.FC = () => {
                   transition={{ duration: 0.5 }}
                 />
                 
-                {/* Image container */}
                 <motion.div
                   className="relative w-full h-full overflow-hidden rounded-2xl border border-white/10 shadow-lg bg-gradient-to-b from-gray-900/10 to-black/30"
                 >
@@ -194,7 +191,6 @@ const AboutSection: React.FC = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Quick Stats in Grid */}
               <div className="grid grid-cols-2 gap-3">
                 <motion.div
                   className="glass-effect p-6 rounded-xl flex flex-col items-center text-center shadow-lg hover:shadow-glow transition-all duration-300"
@@ -230,9 +226,7 @@ const AboutSection: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Right Column: Main Content */}
             <motion.div className="md:col-span-7 space-y-4">
-              {/* Bio Paragraphs */}
               <div className="space-y-3">
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
@@ -269,7 +263,6 @@ const AboutSection: React.FC = () => {
                 </motion.div>
               </div>
 
-              {/* Download Resume Button */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -293,7 +286,6 @@ const AboutSection: React.FC = () => {
                 </ShineButton>
               </motion.div>
 
-              {/* Highlight Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <motion.div
                   variants={pulseAnimation}
