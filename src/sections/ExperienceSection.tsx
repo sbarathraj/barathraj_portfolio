@@ -95,9 +95,9 @@ const ExperienceSection: React.FC = () => {
           {experiences.map((exp, idx) => (
             <motion.div
               key={exp.company}
-              className={`relative card-3d glass-effect p-8 border-2 ${colorMap[exp.color as keyof typeof colorMap]} shadow-lg rounded-xl hover:shadow-glow transition-all duration-300 group ${idx === 0 ? 'z-10 md:-ml-4 md:shadow-2xl md:scale-105' : 'z-0'}`}
-              whileHover={{ scale: 1.07, rotateY: 10, rotateX: 10 }}
-              whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }}
+              className={`relative card-3d glass-effect p-8 border-2 ${colorMap[exp.color as keyof typeof colorMap]} shadow-lg rounded-xl hover:shadow-glow transition-all duration-300 group ${idx === 0 ? 'z-10' : 'z-0'}`}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
             >
               {/* Stepper dot */}
@@ -131,8 +131,8 @@ const ExperienceSection: React.FC = () => {
         {/* Education Card */}
         <motion.div
           className="card-3d glass-effect p-6 border-2 border-primary/70 shadow-lg rounded-xl hover:shadow-glow transition-all duration-300 group"
-          whileHover={{ scale: 1.07, rotateY: 10, rotateX: 10 }}
-          whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
           style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
         >
           <h3 className="text-2xl font-bold mb-4 gradient-text animate-gradient drop-shadow-md">Education</h3>
@@ -140,7 +140,7 @@ const ExperienceSection: React.FC = () => {
             <GraduationCap size={32} className="text-primary animate-bounce-slow mr-3" />
             <span className="text-lg font-bold gradient-text animate-gradient drop-shadow-md">{education.degree}</span>
           </div>
-          <div className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">{education.college}</div>
+          <div className="text-base font-semibold mb-1 gradient-text animate-gradient drop-shadow-md">{education.college}</div>
           <div className="mb-1 flex flex-wrap gap-2">
             <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">CGPA: {education.cgpa}</span>
             <span className="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs">Graduation: {education.graduation}</span>
@@ -159,4 +159,4 @@ const ExperienceSection: React.FC = () => {
   );
 };
 
-export default ExperienceSection; 
+export default ExperienceSection;

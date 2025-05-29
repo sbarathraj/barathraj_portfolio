@@ -33,8 +33,9 @@ const ShineButton: React.FC<ShineButtonProps> = ({
       style={{ minWidth: 44, minHeight: 44 }}
       type={type}
       disabled={disabled}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      // Temporarily removed whileHover and whileTap to test vibration
+      // whileHover={{ scale: 1.02 }}
+      // whileTap={{ scale: 0.98 }}
       aria-label={ariaLabel}
     >
       <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
@@ -45,4 +46,4 @@ const ShineButton: React.FC<ShineButtonProps> = ({
   );
 };
 
-export default ShineButton; 
+export default ShineButton;
