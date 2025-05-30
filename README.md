@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Animated Portfolio
 
 A modern, interactive portfolio website built with React, Three.js, and Framer Motion. This portfolio showcases your work with stunning animations and 3D elements, featuring a custom cursor, smooth page transitions, and responsive design.
