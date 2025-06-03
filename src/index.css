@@ -4,10 +4,6 @@
 
 @layer base {
   :root {
-    --background-light: #ffffff;
-    --background-dark: #0a0a0a;
-    --text-light: #1a1a1a;
-    --text-dark: #ffffff;
     --primary: #14b8a6;
     --primary-light: #5eead4;
     --secondary: #FF6B6B;
@@ -18,29 +14,15 @@
     --gray-dark: #1f2937;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-gradient-to-br from-background-light via-gray-light to-background-light dark:from-background-dark dark:via-gray-dark dark:to-background-dark font-sans overflow-x-hidden transition-colors duration-300;
-    background-attachment: fixed;
-  }
-
-  body.dark {
-    @apply bg-background-dark text-text-dark;
-  }
-
-  ::-webkit-scrollbar {
-    @apply w-2;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-gray-light dark:bg-gray-dark;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-primary rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary-light;
+    @apply bg-white text-gray-900;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -191,6 +173,9 @@ html.loading * {
 }
 
 /* Theme Transition */
-.theme-transition {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+/* Removed theme-transition styles */
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+html.loading * {
+  transition: none !important;
 }

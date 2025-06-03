@@ -12,6 +12,7 @@ import ArticlesSection from './sections/ArticlesSection';
 import CodingProfilesSection from './sections/CodingProfilesSection';
 import Footer from './components/Footer';
 import { SectionProvider } from './context/SectionContext';
+import ThreeDBackground from './components/ThreeDBackground'; // Import the ThreeDBackground component
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -60,30 +61,33 @@ function App() {
 
   return (
     <SectionProvider activeSection={activeSection} setActiveSection={setActiveSection}>
-      {!isMobile && <Cursor position={cursorPosition} />}
-      <Navbar />
+      <div className="relative min-h-screen">
+        <ThreeDBackground /> {/* Add the ThreeDBackground component here */}
+        {!isMobile && <Cursor position={cursorPosition} />}
+        <Navbar />
 
-      <motion.main
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={{ duration: 0.5 }}
-        className="relative"
-      >
-        <AnimatePresence>
-          <HeroSection key="hero" />
-          <AboutSection key="about" />
-          <ExperienceSection key="experience" />
-          <ProjectsSection key="projects" />
-          <SkillsSection key="skills" />
-          <ArticlesSection key="articles" />
-          <CodingProfilesSection key="codingProfiles" />
-          <ContactSection key="contact" />
-        </AnimatePresence>
-        
-        <Footer />
-      </motion.main>
+        <motion.main
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariants}
+          transition={{ duration: 0.5 }}
+          className="relative z-10" // Ensure content is above the background
+        >
+          <AnimatePresence>
+            <HeroSection key="hero" />
+            <AboutSection key="about" />
+            <ExperienceSection key="experience" />
+            <ProjectsSection key="projects" />
+            <SkillsSection key="skills" />
+            <ArticlesSection key="articles" />
+            <CodingProfilesSection key="codingProfiles" />
+            <ContactSection key="contact" />
+          </AnimatePresence>
+
+          <Footer />
+        </motion.main>
+      </div>
     </SectionProvider>
   );
 }
