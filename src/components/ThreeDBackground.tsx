@@ -30,7 +30,7 @@ const Stars: React.FC = (props: any) => {
     <Points ref={ref} positions={positions} stride={3} frustumCulled {...props}>
       <PointMaterial
         transparent
-        color="#ffffff"
+        color="#a259f7" // Changed color to match ParticleBackground
         size={0.01}
         sizeAttenuation={true}
         depthWrite={false}
