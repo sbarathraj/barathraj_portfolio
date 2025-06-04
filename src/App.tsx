@@ -12,7 +12,6 @@ import ArticlesSection from './sections/ArticlesSection';
 import CodingProfilesSection from './sections/CodingProfilesSection';
 import Footer from './components/Footer';
 import { SectionProvider } from './context/SectionContext';
-import ThreeDBackground from './components/ThreeDBackground'; // Import the ThreeDBackground component
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -62,7 +61,7 @@ function App() {
   return (
     <SectionProvider activeSection={activeSection} setActiveSection={setActiveSection}>
       <div className="relative min-h-screen">
-        <ThreeDBackground /> {/* Add the ThreeDBackground component here */}
+       
         {!isMobile && <Cursor position={cursorPosition} />}
         <Navbar />
 
