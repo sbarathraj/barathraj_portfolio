@@ -5,7 +5,6 @@ import { FileDown, Award, Code, Sparkles, Brain, Rocket } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading, AnimatedParagraph } from '../components/AnimatedText';
 import useScrollAnimation from '../hooks/useScrollAnimation';
-import ShineButton from '../components/ShineButton';
 
 // Animation variants
 const floatingAnimation = {
@@ -56,7 +55,13 @@ const AboutSection: React.FC = () => {
   }, [inView, setActiveSection]);
 
   const handleResumeDownload = () => {
-    window.open('https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk', '_blank');
+    try {
+      window.open('https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk', '_blank', 'noopener,noreferrer');
+    } catch (error) {
+      console.error('Error opening resume:', error);
+      // Fallback: try direct navigation
+      window.location.href = 'https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk';
+    }
   };
 
   return (
@@ -139,7 +144,7 @@ const AboutSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <p className="text-gray-600 dark:text-gray-300 text-lg">
+              <p className="text-gray-600 text-lg">
                 Passionate about creating impactful software solutions
               </p>
             </motion.div>
@@ -209,7 +214,7 @@ const AboutSection: React.FC = () => {
                   >
                     100+
                   </motion.div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300">LeetCode Problems</div>
+                  <div className="text-sm text-gray-600">LeetCode Problems</div>
                 </motion.div>
 
                 <motion.div
@@ -225,7 +230,7 @@ const AboutSection: React.FC = () => {
                   >
                     1+ Year
                   </motion.div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300">Professional Experience</div>
+                  <div className="text-sm text-gray-600">Professional Experience</div>
                 </motion.div>
               </div>
             </motion.div>
@@ -241,7 +246,7 @@ const AboutSection: React.FC = () => {
                 >
                   <AnimatedParagraph
                     text="I'm Barathraj S, a passionate and performance-driven Software Engineer from Tamil Nadu, India. I specialize in designing and developing end-to-end solutions that blend intuitive user interfaces with powerful back-end systems."
-                    className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                    className="text-lg text-gray-600 leading-relaxed"
                     delay={0.1}
                   />
                 </motion.div>
@@ -252,7 +257,7 @@ const AboutSection: React.FC = () => {
                 >
                   <AnimatedParagraph
                     text="With expertise in Java, Spring Boot, and Angular, I focus on creating scalable applications that deliver exceptional user experiences. I'm currently working as a Software Engineer at Kuwy Technology Service Pvt Ltd."
-                    className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                    className="text-lg text-gray-600 leading-relaxed"
                     delay={0.2}
                   />
                 </motion.div>
@@ -263,7 +268,7 @@ const AboutSection: React.FC = () => {
                 >
                   <AnimatedParagraph
                     text="I hold a B.Tech in Information Technology from Sri Manakula Vinayagar Engineering College, Puducherry, where I graduated with a CGPA of 7.77."
-                    className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+                    className="text-lg text-gray-600 leading-relaxed"
                     delay={0.3}
                   />
                 </motion.div>
@@ -276,27 +281,16 @@ const AboutSection: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex justify-start py-2"
               >
-                {/* Using an anchor tag for direct download */}
-                <a 
-                  href="https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk"
-                  download="Barathraj_Resume.pdf" // Specify the desired file name
-                  target="_blank" // Open in a new tab
-                  rel="noopener noreferrer" // Recommended for security when using target="_blank"
+                <motion.button
+                  onClick={handleResumeDownload}
+                  className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-primary/30"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{ minWidth: 44, minHeight: 44 }}
                 >
-                  <ShineButton
-                    variant="primary"
-                    ariaLabel="Download Resume"
-                    className="w-auto"
-                  >
-                    <motion.span 
-                      className="flex items-center gap-2"
-                      // Removed whileHover and whileTap as ShineButton already handles them
-                    >
-                      <FileDown size={20} className="" /> 
-                      Download Resume
-                    </motion.span>
-                  </ShineButton>
-                </a>
+                  <FileDown size={20} />
+                  Download Resume
+                </motion.button>
               </motion.div>
 
               {/* Highlight Cards */}
@@ -318,7 +312,7 @@ const AboutSection: React.FC = () => {
                   </motion.div>
                   <div>
                     <div className="font-semibold text-lg text-primary mb-2">DSA Enthusiast</div>
-                    <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    <div className="text-gray-600 text-sm leading-relaxed">
                       I consistently practice DSA problems on Leetcode and enjoy optimizing every solution for time and space.
                     </div>
                   </div>
@@ -341,7 +335,7 @@ const AboutSection: React.FC = () => {
                   </motion.div>
                   <div>
                     <div className="font-semibold text-lg text-secondary mb-2">Philosophy</div>
-                    <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed italic">
+                    <div className="text-gray-600 text-sm leading-relaxed italic">
                       "Code is not just instructions to a machine; it's a medium to solve human problems."
                     </div>
                   </div>

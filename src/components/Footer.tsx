@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, Twitter, Youtube, Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/sbarathraj', label: 'GitHub', color: 'text-gray-800 dark:text-gray-200 hover:text-primary' },
+  { icon: Github, href: 'https://github.com/sbarathraj', label: 'GitHub', color: 'text-gray-800 hover:text-primary' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/sbarathraj', label: 'LinkedIn', color: 'text-blue-600 hover:text-blue-500' },
   { icon: Instagram, href: 'https://www.instagram.com/barathraj_here/', label: 'Instagram', color: 'text-pink-600 hover:text-pink-500' },
   { icon: Twitter, href: 'https://x.com/BarathNft', label: 'Twitter', color: 'text-sky-500 hover:text-sky-400' },
@@ -18,7 +18,7 @@ const contactInfo = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-b from-background-light to-primary/5 dark:from-background-dark dark:to-primary/10 py-16 mt-12 relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-white to-primary/5 py-16 mt-12 relative overflow-hidden">
       {/* Enhanced gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-accent/10 to-transparent pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--accent)_0%,_transparent_70%)] opacity-10 pointer-events-none" />
@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
               Barathraj S
             </motion.h3>
             <motion.p 
-              className="text-gray-600 dark:text-gray-300 mb-6"
+              className="text-gray-600 mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
                   viewport={{ once: true }}
                 >
                   <item.icon className={`${item.color} animate-bounce-slow`} size={20} />
-                  <span className="text-gray-600 dark:text-gray-300">{item.text}</span>
+                  <span className="text-gray-600">{item.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
                 >
                   <a 
                     href={`#${item.toLowerCase()}`} 
-                    className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300 flex items-center group"
+                    className="text-gray-600 hover:text-primary transition-colors duration-300 flex items-center group"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-gradient-to-r from-primary to-accent mr-0 group-hover:mr-2 transition-all duration-300" />
                     {item}
@@ -172,7 +172,7 @@ const Footer: React.FC = () => {
           viewport={{ once: true }}
         >
           <motion.p 
-            className="flex items-center justify-center text-gray-600 dark:text-gray-300"
+            className="flex items-center justify-center text-gray-600"
             whileHover={{ scale: 1.05 }}
           >
             Made with <Heart className="text-accent mx-1 animate-pulse" size={16} /> by Barathraj S in {new Date().getFullYear()}

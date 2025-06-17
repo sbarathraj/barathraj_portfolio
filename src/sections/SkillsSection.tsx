@@ -280,7 +280,7 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, delay }) => {
           >
             <TechIcon name={skill.name} size={18} />
           </motion.div>
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <span className="text-sm font-medium text-gray-700">
             {skill.name}
           </span>
         </div>
@@ -296,7 +296,7 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, delay }) => {
           ) : '0%'}
         </span>
       </div>
-      <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <motion.div
           className="h-full bg-gradient-to-r from-primary via-secondary to-accent rounded-full relative"
           initial={{ width: '0%' }}

@@ -165,16 +165,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, isSelected, o
       </div>
       {/* Project content with glass effect */}
       <div className="p-6 relative z-20">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors duration-300 gradient-text animate-gradient">
+        <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300 gradient-text animate-gradient">
           {project.title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+        <p className="text-gray-600 mb-4">{project.description}</p>
         {/* Tags with hover effect */}
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full hover:bg-primary hover:text-white transition-colors duration-300"
+              className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-primary hover:text-white transition-colors duration-300"
             >
               {tag}
             </span>

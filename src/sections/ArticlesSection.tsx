@@ -101,7 +101,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
       variants={variants.fadeInUp}
       initial="hidden"
       animate={controls}
-      className="bg-white dark:bg-background-light rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
       whileHover={{ y: -5 }}
       whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }}
       style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
@@ -116,10 +116,10 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, index }) => {
       </div>
 
       <div className="p-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{article.title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">{article.excerpt}</p>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{article.title}</h3>
+        <p className="text-gray-600 mb-4">{article.excerpt}</p>
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500 dark:text-gray-400">{article.date}</span>
+          <span className="text-sm text-gray-500">{article.date}</span>
           <motion.a
             href={article.link}
             target="_blank"

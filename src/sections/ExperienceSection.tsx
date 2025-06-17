@@ -85,7 +85,7 @@ const ExperienceSection: React.FC = () => {
         <div className="mb-4 text-center">
           <h2 className="text-3xl md:text-5xl font-bold gradient-text animate-gradient drop-shadow-md">Experience & Education</h2>
           <div className="w-24 h-1 mx-auto bg-gradient-to-r from-primary via-secondary to-accent rounded-full my-4 animate-gradient" />
-          <div className="text-lg text-gray-700 dark:text-gray-300 font-medium mb-8">A journey of learning, building, and growing as a developer.</div>
+          <div className="text-lg text-gray-700 font-medium mb-8">A journey of learning, building, and growing as a developer.</div>
         </div>
         {/* Experience Timeline */}
         <div className="relative flex flex-col gap-8 mb-12">
@@ -101,7 +101,7 @@ const ExperienceSection: React.FC = () => {
               style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
             >
               {/* Stepper dot */}
-              <div className={`absolute -left-8 top-8 w-6 h-6 rounded-full border-4 ${exp.color === 'primary' ? 'border-primary' : 'border-secondary'} bg-white dark:bg-background-dark z-10 hidden md:block animate-pulse`} />
+              <div className={`absolute -left-8 top-8 w-6 h-6 rounded-full border-4 ${exp.color === 'primary' ? 'border-primary' : 'border-secondary'} bg-white z-10 hidden md:block animate-pulse`} />
               <div className="flex items-center mb-2">
                 <Briefcase size={28} className={`mr-3 ${exp.color === 'primary' ? 'text-primary' : 'text-secondary'} animate-bounce-slow`} />
                 <span className="text-lg font-bold gradient-text animate-gradient drop-shadow-md">{exp.company}</span>
@@ -111,8 +111,8 @@ const ExperienceSection: React.FC = () => {
                 <span className={`px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs`}>{exp.period}</span>
                 <span className={`px-3 py-1 rounded-full bg-accent/10 text-accent font-bold text-xs`}>{exp.location}</span>
               </div>
-              <div className="mb-2 text-gray-700 dark:text-gray-300 text-sm">{exp.description}</div>
-              <ul className="pl-5 list-disc text-gray-700 dark:text-gray-200 text-sm">
+              <div className="mb-2 text-gray-700 text-sm">{exp.description}</div>
+              <ul className="pl-5 list-disc text-gray-700 text-sm">
                 {exp.contributions.map((item, i) => (
                   <motion.li
                     key={item + i}
@@ -145,14 +145,14 @@ const ExperienceSection: React.FC = () => {
             <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">CGPA: {education.cgpa}</span>
             <span className="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs">Graduation: {education.graduation}</span>
           </div>
-          <div className="mb-2 text-gray-700 dark:text-gray-300 text-sm">{education.description}</div>
-          <div className="mb-1 text-gray-700 dark:text-gray-300 text-sm font-semibold">Key Areas of Study:</div>
-          <ul className="mb-2 pl-5 list-disc text-gray-700 dark:text-gray-200 text-sm">
+          <div className="mb-2 text-gray-700 text-sm">{education.description}</div>
+          <div className="mb-1 text-gray-700 text-sm font-semibold">Key Areas of Study:</div>
+          <ul className="mb-2 pl-5 list-disc text-gray-700 text-sm">
             {education.keyAreas.map((area, idx) => (
               <li key={idx} className="mb-1 flex items-center"><ChevronRight size={16} className="text-primary mr-1" />{area}</li>
             ))}
           </ul>
-          <div className="text-gray-700 dark:text-gray-300 text-sm italic">{education.project}</div>
+          <div className="text-gray-700 text-sm italic">{education.project}</div>
         </motion.div>
       </div>
     </section>

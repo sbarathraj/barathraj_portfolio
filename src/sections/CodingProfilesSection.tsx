@@ -150,7 +150,7 @@ const CodingProfileCard: React.FC<CodingProfileCardProps> = ({ profile, index })
             href={profile.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-700 dark:text-gray-200 font-medium underline hover:text-primary dark:hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="text-gray-700 font-medium underline hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
             aria-label={`Visit ${profile.title} profile for @${profile.username}`}
           >
             @{profile.username}
@@ -168,7 +168,7 @@ const CodingProfileCard: React.FC<CodingProfileCardProps> = ({ profile, index })
             transition={{ duration: 0.3, delay: 0.1 * idx }}
             viewport={{ once: true }}
           >
-            <span className="text-gray-700 dark:text-gray-300 font-medium">{stat.label}</span>
+            <span className="text-gray-700 font-medium">{stat.label}</span>
             <span className={`font-bold text-lg bg-gradient-to-r ${profile.gradient} bg-clip-text text-transparent animate-gradient`}>
               {stat.value}
             </span>

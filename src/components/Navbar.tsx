@@ -51,15 +51,6 @@ const Navbar: React.FC = () => {
   const { activeSection, setActiveSection } = useSection();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme');
-      if (stored) return stored === 'dark';
-      // System preference
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return false;
-  });
 
   const sections = [
     { id: 'home', label: 'Home' },
@@ -91,40 +82,6 @@ const Navbar: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Handle theme toggle, persist, and sync
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
-
-  // Listen for system preference changes
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem('theme')) {
-        setIsDarkMode(e.matches);
-      }
-    };
-    media.addEventListener('change', handler);
-    return () => media.removeEventListener('change', handler);
-  }, []);
-
-  // Sync theme across tabs
-  useEffect(() => {
-    const syncTheme = (e: StorageEvent) => {
-      if (e.key === 'theme') {
-        setIsDarkMode(e.newValue === 'dark');
-      }
-    };
-    window.addEventListener('storage', syncTheme);
-    return () => window.removeEventListener('storage', syncTheme);
   }, []);
 
   const scrollToSection = (sectionId: string) => {

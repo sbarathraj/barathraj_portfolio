@@ -64,7 +64,7 @@
   }
 
   .glass-effect {
-    @apply bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-black/20;
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
   }
 
   .professional-button {
@@ -166,14 +166,6 @@
     background-position: 0% 0%;
   }
 }
-
-/* Prevent FOUC (Flash of Unstyled Content) */
-html.loading * {
-  transition: none !important;
-}
-
-/* Theme Transition */
-/* Removed theme-transition styles */
 
 /* Prevent FOUC (Flash of Unstyled Content) */
 html.loading * {

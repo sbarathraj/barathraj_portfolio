@@ -71,7 +71,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark;
+  @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-white;
 }
 
 /* Smooth scrolling with momentum */
@@ -102,12 +102,12 @@ a {
 
 /* Glassmorphism effect */
 .glass {
-  @apply bg-white/10 dark:bg-black/10 backdrop-blur-lg;
+  @apply bg-white/10 backdrop-blur-lg;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass:hover {
-  @apply bg-white/20 dark:bg-black/20;
+  @apply bg-white/20;
 }
 
 /* Floating animation */
@@ -229,7 +229,7 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-gray-100;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -273,7 +273,7 @@ body {
   @apply m-0 p-0;
 }
 
-/* Improve dark mode transitions */
+/* Improve transitions */
 * {
   @apply transition-colors duration-200;
 }
@@ -309,21 +309,6 @@ img {
 
 /* Remove default focus styles from all elements */
 *:focus {
-  @apply outline-none ring-0;
-}
-
-/* Remove default focus styles from all elements in dark mode */
-.dark *:focus {
-  @apply outline-none ring-0;
-}
-
-/* Remove default focus styles from all elements in light mode */
-.light *:focus {
-  @apply outline-none ring-0;
-}
-
-/* Remove default focus styles from all elements in any theme */
-[data-theme] *:focus {
   @apply outline-none ring-0;
 }
 
@@ -421,4 +406,4 @@ img {
   filter: blur(40px);
   animation: pulse 8s ease-in-out infinite;
   will-change: transform, opacity;
-} 
+}

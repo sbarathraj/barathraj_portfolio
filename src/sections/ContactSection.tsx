@@ -179,7 +179,7 @@ const ContactSection: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   {/* Name field */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                       Your Name
                     </label>
                     <input
@@ -188,7 +188,7 @@ const ContactSection: React.FC = () => {
                       name="name"
                       value={formState.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 dark:text-gray-100 border ${
+                      className={`w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 border ${
                         errors.name ? 'border-error' : 'border-primary/30'
                       } rounded-lg focus:outline-none focus:border-primary backdrop-blur-sm`}
                     />
@@ -198,7 +198,7 @@ const ContactSection: React.FC = () => {
                   </div>
                   {/* Email field */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                       Your Email
                     </label>
                     <input
@@ -207,7 +207,7 @@ const ContactSection: React.FC = () => {
                       name="email"
                       value={formState.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 dark:text-gray-100 border ${
+                      className={`w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 border ${
                         errors.email ? 'border-error' : 'border-primary/30'
                       } rounded-lg focus:outline-none focus:border-primary backdrop-blur-sm`}
                     />
@@ -218,7 +218,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 {/* Subject field */}
                 <div className="mb-6">
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                     Subject (Optional)
                   </label>
                   <input
@@ -227,12 +227,12 @@ const ContactSection: React.FC = () => {
                     name="subject"
                     value={formState.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 dark:text-gray-100 border border-primary/30 rounded-lg focus:outline-none focus:border-primary backdrop-blur-sm"
+                    className="w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 border border-primary/30 rounded-lg focus:outline-none focus:border-primary backdrop-blur-sm"
                   />
                 </div>
                 {/* Message field */}
                 <div className="mb-6">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                     Your Message
                   </label>
                   <textarea
@@ -241,7 +241,7 @@ const ContactSection: React.FC = () => {
                     value={formState.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 dark:text-gray-100 border ${
+                    className={`w-full px-4 py-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 text-gray-800 border ${
                       errors.message ? 'border-error' : 'border-primary/30'
                     } rounded-lg focus:outline-none focus:border-primary resize-none backdrop-blur-sm`}
                   />
@@ -337,7 +337,7 @@ const ContactInfo: React.FC = () => {
                 </div>
                 <div>
                   <h4 className={`text-lg font-bold gradient-text animate-gradient drop-shadow-md`}>{item.title}</h4>
-                  <p className="text-gray-700 dark:text-gray-200 font-medium">{item.content}</p>
+                  <p className="text-gray-700 font-medium">{item.content}</p>
                 </div>
               </motion.a>
             );
@@ -346,10 +346,10 @@ const ContactInfo: React.FC = () => {
       </div>
       <div className="glass-effect rounded-xl p-8 border-2 border-secondary/70 flex-grow shadow-lg">
         <h3 className="text-2xl font-bold mb-6 gradient-text animate-gradient drop-shadow-md">Let's Connect</h3>
-        <p className="text-gray-700 dark:text-gray-200 mb-6 font-medium">
+        <p className="text-gray-700 mb-6 font-medium">
           I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
         </p>
-        <p className="text-gray-700 dark:text-gray-200 font-medium">
+        <p className="text-gray-700 font-medium">
           Whether you have a question or just want to say hi, I'll try my best to get back to you!
         </p>
       </div>
@@ -363,7 +363,7 @@ const SuccessMessage: React.FC = () => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="bg-background-light/50 backdrop-blur-sm rounded-xl p-8 border border-success/30 h-full flex flex-col justify-center items-center text-center"
+      className="bg-white/50 backdrop-blur-sm rounded-xl p-8 border border-success/30 h-full flex flex-col justify-center items-center text-center"
     >
       <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center mb-6">
         <svg
@@ -382,8 +382,8 @@ const SuccessMessage: React.FC = () => {
           <polyline points="22 4 12 14.01 9 11.01"></polyline>
         </svg>
       </div>
-      <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-      <p className="text-gray-300 mb-6">
+      <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+      <p className="text-gray-600 mb-6">
         Thank you for reaching out. I'll get back to you as soon as possible.
       </p>
       <p className="text-success text-sm">Your message has been delivered successfully.</p>

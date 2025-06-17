@@ -13,35 +13,35 @@ const socialLinks = [
     icon: Github, 
     href: 'https://github.com/sbarathraj', 
     label: 'GitHub',
-    color: 'text-[#333] dark:text-[#fff]',
+    color: 'text-[#333]',
     gradient: 'from-gray-700 to-gray-900'
   },
   { 
     icon: Linkedin, 
     href: 'https://www.linkedin.com/in/sbarathraj/', 
     label: 'LinkedIn',
-    color: 'text-[#0077B5] dark:text-[#0077B5]',
+    color: 'text-[#0077B5]',
     gradient: 'from-blue-500 to-blue-700'
   },
   { 
     icon: Twitter, 
     href: 'https://x.com/BarathNft', 
     label: 'Twitter',
-    color: 'text-[#1DA1F2] dark:text-[#1DA1F2]',
+    color: 'text-[#1DA1F2]',
     gradient: 'from-blue-400 to-blue-600'
   },
   { 
     icon: Youtube, 
     href: 'https://www.youtube.com/@barathrajs7498', 
     label: 'YouTube',
-    color: 'text-[#FF0000] dark:text-[#FF0000]',
+    color: 'text-[#FF0000]',
     gradient: 'from-red-500 to-red-700'
   },
   { 
     icon: Instagram, 
     href: 'https://www.instagram.com/barathraj_here/', 
     label: 'Instagram',
-    color: 'text-[#E4405F] dark:text-[#E4405F]',
+    color: 'text-[#E4405F]',
     gradient: 'from-pink-500 to-purple-500'
   },
 ];
@@ -278,7 +278,7 @@ const HeroSection: React.FC = () => {
           </motion.h1>
 
           <motion.p 
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed"
             variants={item}
           >
             <motion.span
