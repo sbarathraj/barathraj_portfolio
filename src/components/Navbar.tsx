@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Instagram, Twitter, Youtube, Sun, Moon } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 
 const navItems = [
@@ -51,6 +51,7 @@ const Navbar: React.FC = () => {
   const { activeSection, setActiveSection } = useSection();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const sections = [
     { id: 'home', label: 'Home' },
@@ -91,6 +92,16 @@ const Navbar: React.FC = () => {
       setActiveSection(sectionId);
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const toggleDarkMode = () => {
+    const body = document.body;
+    if (isDarkMode) {
+      body.classList.remove('dark-mode');
+    } else {
+      body.classList.add('dark-mode');
+    }
+    setIsDarkMode(!isDarkMode);
   };
 
   return (
@@ -158,8 +169,29 @@ const Navbar: React.FC = () => {
             </ul>
           </div>
 
-          {/* Right: Hamburger (mobile) */}
+          {/* Right: Dark Mode Toggle + Hamburger */}
           <div className="flex items-center gap-2 md:gap-4">
+            {/* Dark Mode Toggle */}
+            <motion.button
+              onClick={toggleDarkMode}
+              className={`p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 text-gray-600 hover:text-primary transition-all duration-300 ${isScrolled ? 'p-1.5' : 'p-2'}`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              style={{ minWidth: 44, minHeight: 44 }}
+              aria-label="Toggle dark mode"
+            >
+              <motion.div
+                animate={{ rotate: isDarkMode ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isDarkMode ? (
+                  <Sun size={isScrolled ? 18 : 20} />
+                ) : (
+                  <Moon size={isScrolled ? 18 : 20} />
+                )}
+              </motion.div>
+            </motion.button>
+
             {/* Mobile Menu Button (mobile only) */}
             <motion.button
               whileTap={{ scale: 0.9, rotate: isMobileMenuOpen ? 90 : 0 }}

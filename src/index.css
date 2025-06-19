@@ -23,6 +23,153 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark Mode Styles */
+  body.dark-mode {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  body.dark-mode .gradient-text {
+    background: linear-gradient(135deg, #5eead4 0%, #ff8585 50%, #d1aaff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  body.dark-mode .glass-effect {
+    @apply bg-gray-800/20 border-gray-700/30;
+  }
+
+  body.dark-mode .card-3d {
+    @apply bg-gray-800/30 border-gray-700/50;
+  }
+
+  body.dark-mode nav {
+    @apply bg-gray-800/30 border-gray-700/30;
+  }
+
+  body.dark-mode .text-gray-600 {
+    @apply text-gray-300;
+  }
+
+  body.dark-mode .text-gray-700 {
+    @apply text-gray-200;
+  }
+
+  body.dark-mode .text-gray-800 {
+    @apply text-gray-100;
+  }
+
+  body.dark-mode .text-gray-900 {
+    @apply text-gray-50;
+  }
+
+  body.dark-mode .bg-white {
+    @apply bg-gray-800;
+  }
+
+  body.dark-mode .bg-gray-100 {
+    @apply bg-gray-700;
+  }
+
+  body.dark-mode .bg-gray-200 {
+    @apply bg-gray-600;
+  }
+
+  body.dark-mode .border-gray-300 {
+    @apply border-gray-600;
+  }
+
+  body.dark-mode .border-white\/20 {
+    @apply border-gray-700/30;
+  }
+
+  body.dark-mode .border-white\/30 {
+    @apply border-gray-700/40;
+  }
+
+  body.dark-mode .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  }
+
+  body.dark-mode .shadow-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+
+  body.dark-mode .hover\:shadow-glow:hover {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.4), 0 0 40px rgba(20, 184, 166, 0.2);
+  }
+
+  body.dark-mode input,
+  body.dark-mode textarea {
+    @apply bg-gray-700/50 text-gray-100 border-gray-600;
+  }
+
+  body.dark-mode input:focus,
+  body.dark-mode textarea:focus {
+    @apply border-primary bg-gray-700/70;
+  }
+
+  body.dark-mode .bg-primary\/10 {
+    @apply bg-primary/20;
+  }
+
+  body.dark-mode .bg-secondary\/10 {
+    @apply bg-secondary/20;
+  }
+
+  body.dark-mode .bg-accent\/10 {
+    @apply bg-accent/20;
+  }
+
+  body.dark-mode .bg-white\/10 {
+    @apply bg-gray-700/20;
+  }
+
+  body.dark-mode .bg-white\/20 {
+    @apply bg-gray-700/30;
+  }
+
+  body.dark-mode .bg-white\/30 {
+    @apply bg-gray-700/40;
+  }
+
+  body.dark-mode .hover\:bg-white\/20:hover {
+    @apply bg-gray-600/30;
+  }
+
+  body.dark-mode .hover\:bg-gray-200:hover {
+    @apply bg-gray-600;
+  }
+
+  body.dark-mode .hover\:text-gray-900:hover {
+    @apply text-gray-100;
+  }
+
+  body.dark-mode .border-primary\/20 {
+    @apply border-primary/40;
+  }
+
+  body.dark-mode .border-secondary\/20 {
+    @apply border-secondary/40;
+  }
+
+  body.dark-mode .border-accent\/20 {
+    @apply border-accent/40;
+  }
+
+  body.dark-mode .border-primary\/70 {
+    @apply border-primary/80;
+  }
+
+  body.dark-mode .border-secondary\/70 {
+    @apply border-secondary/80;
+  }
+
+  body.dark-mode .border-accent\/70 {
+    @apply border-accent/80;
   }
 }
 
