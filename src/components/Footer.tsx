@@ -18,7 +18,7 @@ const contactInfo = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-b from-white to-primary/5 py-16 mt-12 relative overflow-hidden">
+    <footer className="bg-gradient-to-b to-primary/5 py-16 mt-12 relative overflow-hidden">
       {/* Enhanced gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-accent/10 to-transparent pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--accent)_0%,_transparent_70%)] opacity-10 pointer-events-none" />

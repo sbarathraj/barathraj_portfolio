@@ -286,9 +286,29 @@ const AboutSection: React.FC = () => {
                   className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-primary/30"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  animate={{ 
+                    y: [0, -5, 0],
+                    transition: { 
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }
+                  }}
                   style={{ minWidth: 44, minHeight: 44 }}
                 >
-                  <FileDown size={20} />
+                  <motion.div
+                    animate={{ 
+                      y: [0, -3, 0],
+                      transition: {
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        delay: 0.3
+                      }
+                    }}
+                  >
+                    <FileDown size={20} />
+                  </motion.div>
                   Download Resume
                 </motion.button>
               </motion.div>

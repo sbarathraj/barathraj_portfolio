@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Instagram, Twitter, Youtube, Sun, Moon } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
+import { AnimatePresence } from "framer-motion";
 
+const darkMode = true;
 const navItems = [
   { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
@@ -19,7 +21,8 @@ const socialLinks = [
     icon: Github,
     href: 'https://github.com/sbarathraj',
     label: 'GitHub',
-    color: 'text-[#333]'
+    // color: 'text-[#333]'
+    color: 'text-gray-800 hover:text-primary'
   },
   {
     icon: Linkedin,
@@ -174,24 +177,35 @@ const Navbar: React.FC = () => {
             {/* Dark Mode Toggle */}
             <motion.button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-lg bg-white/20 backdrop-blur-sm border border-white/30 text-gray-600 hover:text-primary transition-all duration-300 ${isScrolled ? 'p-1.5' : 'p-2'}`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              style={{ minWidth: 44, minHeight: 44 }}
+              className="p-2 rounded-full transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/50"
               aria-label="Toggle dark mode"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <motion.div
-                animate={{ rotate: isDarkMode ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isDarkMode ? (
-                  <Sun size={isScrolled ? 18 : 20} />
-                ) : (
-                  <Moon size={isScrolled ? 18 : 20} />
-                )}
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={isDarkMode ? "sun" : "moon"}
+                  initial={{ opacity: 0, rotate: -30, y: 10 }}
+                  animate={{ 
+                    opacity: 1, 
+                    rotate: 0, 
+                    y: 0,
+                    backgroundColor: isDarkMode ? '#1e293b' : '#f8fafc',
+                    transition: { duration: 0.5 }
+                  }}
+                  exit={{ opacity: 0, rotate: 30, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="rounded-full p-1"
+                >
+                  {isDarkMode ? (
+                    <Sun className="w-5 h-5 text-white" />
+                  ) : (
+                    <Moon className="w-5 h-5 text-indigo-800" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </motion.button>
-
             {/* Mobile Menu Button (mobile only) */}
             <motion.button
               whileTap={{ scale: 0.9, rotate: isMobileMenuOpen ? 90 : 0 }}

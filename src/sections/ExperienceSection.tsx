@@ -70,7 +70,7 @@ const ExperienceSection: React.FC = () => {
     >
       {/* Animated, colorful background */}
       <div className="animated-bg" />
-      <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-b from-primary/10 to-transparent rounded-full blur-3xl animate-float" />
+      {/* <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-b from-primary/10 to-transparent rounded-full blur-3xl animate-float" /> */}
       <div className="absolute right-10 top-1/2 w-16 h-16 animate-spin-slow" style={{ perspective: '600px' }}>
         <div style={{
           width: '100%',

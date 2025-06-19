@@ -13,8 +13,7 @@ const socialLinks = [
     icon: Github, 
     href: 'https://github.com/sbarathraj', 
     label: 'GitHub',
-    color: 'text-[#333]',
-    gradient: 'from-gray-700 to-gray-900'
+    color: 'text-gray-800 hover:text-primary'
   },
   { 
     icon: Linkedin, 
