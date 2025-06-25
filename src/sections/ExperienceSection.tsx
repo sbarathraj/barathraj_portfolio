@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Briefcase, ChevronRight, CheckCircle } from 'lucide-react';
+import { AnimatedHeading, AnimatedParagraph } from '../components/AnimatedText';
 
 const education = {
   degree: 'Bachelor of Technology (B.Tech), Information Technology',
@@ -83,14 +84,28 @@ const ExperienceSection: React.FC = () => {
       </div>
       <div className="container mx-auto px-6">
         <div className="mb-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold gradient-text animate-gradient drop-shadow-md">Experience & Education</h2>
+          <AnimatedHeading
+            text="Experience & Education"
+            className="text-3xl md:text-5xl font-bold gradient-text animate-gradient drop-shadow-md"
+            once={true}
+            delay={0.1}
+          />
           <div className="w-24 h-1 mx-auto bg-gradient-to-r from-primary via-secondary to-accent rounded-full my-4 animate-gradient" />
-          <div className="text-lg text-gray-700 font-medium mb-8">A journey of learning, building, and growing as a developer.</div>
+          <AnimatedParagraph
+            text="A journey of learning, building, and growing as a developer."
+            className="text-lg text-gray-700 font-medium mb-8"
+            once={true}
+            delay={0.2}
+          />
         </div>
         {/* Experience Timeline */}
         <div className="relative flex flex-col gap-8 mb-12">
-          <h3 className="text-2xl font-bold mb-4 gradient-text animate-gradient drop-shadow-md">Professional Experience</h3>
-          {/* Vertical timeline line */}
+          <AnimatedHeading
+            text="Professional Experience"
+            className="text-2xl font-bold mb-4 gradient-text animate-gradient drop-shadow-md"
+            once={true}
+            delay={0.15}
+          />
           <div className="absolute left-4 top-10 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-accent rounded-full opacity-40 z-0 hidden md:block" />
           {experiences.map((exp, idx) => (
             <motion.div
@@ -104,14 +119,39 @@ const ExperienceSection: React.FC = () => {
               <div className={`absolute -left-8 top-8 w-6 h-6 rounded-full border-4 ${exp.color === 'primary' ? 'border-primary' : 'border-secondary'} bg-white z-10 hidden md:block animate-pulse`} />
               <div className="flex items-center mb-2">
                 <Briefcase size={28} className={`mr-3 ${exp.color === 'primary' ? 'text-primary' : 'text-secondary'} animate-bounce-slow`} />
-                <span className="text-lg font-bold gradient-text animate-gradient drop-shadow-md">{exp.company}</span>
+                <AnimatedHeading
+                  text={exp.company}
+                  className="text-lg font-bold gradient-text animate-gradient drop-shadow-md inline-block"
+                  once={true}
+                  delay={0.2 + idx * 0.1}
+                />
               </div>
               <div className="flex flex-wrap items-center mb-2 gap-2">
-                <span className={`px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs`}>{exp.role}</span>
-                <span className={`px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs`}>{exp.period}</span>
-                <span className={`px-3 py-1 rounded-full bg-accent/10 text-accent font-bold text-xs`}>{exp.location}</span>
+                <AnimatedParagraph
+                  text={exp.role}
+                  className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs inline-block"
+                  once={true}
+                  delay={0.25 + idx * 0.1}
+                />
+                <AnimatedParagraph
+                  text={exp.period}
+                  className="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs inline-block"
+                  once={true}
+                  delay={0.3 + idx * 0.1}
+                />
+                <AnimatedParagraph
+                  text={exp.location}
+                  className="px-3 py-1 rounded-full bg-accent/10 text-accent font-bold text-xs inline-block"
+                  once={true}
+                  delay={0.35 + idx * 0.1}
+                />
               </div>
-              <div className="mb-2 text-gray-700 text-sm">{exp.description}</div>
+              <AnimatedParagraph
+                text={exp.description}
+                className="mb-2 text-gray-700 text-sm"
+                once={true}
+                delay={0.4 + idx * 0.1}
+              />
               <ul className="pl-5 list-disc text-gray-700 text-sm">
                 {exp.contributions.map((item, i) => (
                   <motion.li
@@ -135,24 +175,61 @@ const ExperienceSection: React.FC = () => {
           whileTap={{ scale: 0.98 }}
           style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}
         >
-          <h3 className="text-2xl font-bold mb-4 gradient-text animate-gradient drop-shadow-md">Education</h3>
+          <AnimatedHeading
+            text="Education"
+            className="text-2xl font-bold mb-4 gradient-text animate-gradient drop-shadow-md"
+            once={true}
+            delay={0.2}
+          />
           <div className="flex items-center mb-2">
             <GraduationCap size={32} className="text-primary animate-bounce-slow mr-3" />
-            <span className="text-lg font-bold gradient-text animate-gradient drop-shadow-md">{education.degree}</span>
+            <AnimatedHeading
+              text={education.degree}
+              className="text-lg font-bold gradient-text animate-gradient drop-shadow-md inline-block"
+              once={true}
+              delay={0.25}
+            />
           </div>
-          <div className="text-base font-semibold mb-1 gradient-text animate-gradient drop-shadow-md">{education.college}</div>
+          <AnimatedParagraph
+            text={education.college}
+            className="text-base font-semibold mb-1 gradient-text animate-gradient drop-shadow-md"
+            once={true}
+            delay={0.3}
+          />
           <div className="mb-1 flex flex-wrap gap-2">
-            <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">CGPA: {education.cgpa}</span>
-            <span className="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs">Graduation: {education.graduation}</span>
+            <AnimatedParagraph
+              text={`CGPA: ${education.cgpa}`}
+              className="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs inline-block"
+              once={true}
+              delay={0.35}
+            />
+            <AnimatedParagraph
+              text={`Graduation: ${education.graduation}`}
+              className="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-bold text-xs inline-block"
+              once={true}
+              delay={0.4}
+            />
           </div>
-          <div className="mb-2 text-gray-700 text-sm">{education.description}</div>
+          <AnimatedParagraph
+            text={education.description}
+            className="mb-2 text-gray-700 text-sm"
+            once={true}
+            delay={0.45}
+          />
           <div className="mb-1 text-gray-700 text-sm font-semibold">Key Areas of Study:</div>
           <ul className="mb-2 pl-5 list-disc text-gray-700 text-sm">
             {education.keyAreas.map((area, idx) => (
-              <li key={idx} className="mb-1 flex items-center"><ChevronRight size={16} className="text-primary mr-1" />{area}</li>
+              <motion.li key={idx} className="mb-1 flex items-center" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 * idx }}>
+                <ChevronRight size={16} className="text-primary mr-1" />{area}
+              </motion.li>
             ))}
           </ul>
-          <div className="text-gray-700 text-sm italic">{education.project}</div>
+          <AnimatedParagraph
+            text={education.project}
+            className="text-gray-700 text-sm italic"
+            once={true}
+            delay={0.5}
+          />
         </motion.div>
       </div>
     </section>

@@ -50,6 +50,10 @@ const socialLinks = [
   },
 ];
 
+const THEME_KEY = 'theme';
+const LIGHT = 'light';
+const DARK = 'dark';
+
 const Navbar: React.FC = () => {
   const { activeSection, setActiveSection } = useSection();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -64,6 +68,20 @@ const Navbar: React.FC = () => {
     { id: 'skills', label: 'Skills' },
     { id: 'contact', label: 'Contact' }
   ];
+
+  // Initialize theme on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === DARK) {
+      document.body.classList.add('dark-mode');
+      setIsDarkMode(true);
+    } else {
+      document.body.classList.remove('dark-mode');
+      setIsDarkMode(false);
+      // Optionally, set default in localStorage
+      if (!savedTheme) localStorage.setItem(THEME_KEY, LIGHT);
+    }
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -98,13 +116,15 @@ const Navbar: React.FC = () => {
   };
 
   const toggleDarkMode = () => {
-    const body = document.body;
     if (isDarkMode) {
-      body.classList.remove('dark-mode');
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem(THEME_KEY, LIGHT);
+      setIsDarkMode(false);
     } else {
-      body.classList.add('dark-mode');
+      document.body.classList.add('dark-mode');
+      localStorage.setItem(THEME_KEY, DARK);
+      setIsDarkMode(true);
     }
-    setIsDarkMode(!isDarkMode);
   };
 
   return (
