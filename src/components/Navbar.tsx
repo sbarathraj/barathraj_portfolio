@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Instagram, Twitter, Youtube, Sun, Moon, ChevronDown } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
@@ -53,9 +53,8 @@ const DARK = 'dark';
 
 const Navbar: React.FC = () => {
   const { activeSection, setActiveSection } = useSection();
-  const [isVisible, setIsVisible] = useState(false);
-  const [isScrollingDown, setIsScrollingDown] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -84,26 +83,10 @@ const Navbar: React.FC = () => {
   // Enhanced scroll behavior similar to continue.dev
   useEffect(() => {
     const handleScroll = () => {
+      setIsVisible(true);
+      // Active section logic
       const currentScrollY = window.scrollY;
       const scrollPosition = currentScrollY + 100;
-
-      // Show/hide navbar based on scroll direction and position
-      if (currentScrollY < 50) {
-        // At the top - hide navbar
-        setIsVisible(false);
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up - show navbar
-        setIsVisible(true);
-        setIsScrollingDown(false);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and past threshold - hide navbar
-        setIsVisible(false);
-        setIsScrollingDown(true);
-      }
-
-      setLastScrollY(currentScrollY);
-
-      // Update active section
       for (const section of sections) {
         const element = document.getElementById(section.id);
         if (element) {
@@ -114,11 +97,11 @@ const Navbar: React.FC = () => {
           }
         }
       }
+      lastScrollY.current = currentScrollY;
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, setActiveSection]);
+  }, [setActiveSection]);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -157,7 +140,7 @@ const Navbar: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg shadow-black/5 dark:shadow-black/20"
+            className="glass-effect rounded-2xl shadow-lg shadow-black/5 dark:shadow-black/20"
             whileHover={{ 
               boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
             }}
@@ -171,23 +154,22 @@ const Navbar: React.FC = () => {
                 className="flex items-center space-x-2"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">B</span>
+                  <span className="text-white font-bold text-sm">BS</span>
                 </div>
-                <span className="font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                <span className="font-bold text-xl gradient-text">
                   Barathraj S
                 </span>
               </motion.div>
-
               {/* Desktop Navigation */}
               <div className="hidden lg:flex items-center space-x-1">
                 {navItems.map((item) => (
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    className={`relative px-4 py-2 rounded-xl text-sm transition-all duration-200 ${
                       activeSection === item.id
                         ? 'text-primary bg-primary/10'
-                        : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+                        : 'text-gray-900 dark:text-gray-100 hover:text-primary dark:hover:text-primary hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -204,7 +186,6 @@ const Navbar: React.FC = () => {
                   </motion.button>
                 ))}
               </div>
-
               {/* Right side actions */}
               <div className="flex items-center space-x-3">
                 {/* Theme Toggle */}
@@ -291,19 +272,19 @@ const Navbar: React.FC = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="fixed top-20 left-4 right-4 z-50 lg:hidden"
+              className="fixed top-20 left-4 right-4 z-50 lg:hidden glass-effect"
             >
-              <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-xl p-6">
+              <div className="glass-effect rounded-2xl shadow-xl p-6">
                 {/* Navigation Links */}
                 <div className="space-y-1 mb-6">
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
+                      className={`w-full text-left px-4 py-3 rounded-xl text-base transition-all duration-200 ${
                         activeSection === item.id
                           ? 'text-primary bg-primary/10'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+                          : 'text-gray-900 dark:text-gray-100 hover:text-primary dark:hover:text-primary hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                       }`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -334,7 +315,7 @@ const Navbar: React.FC = () => {
 
                 {/* Social Links */}
                 <div className="border-t border-gray-200/50 dark:border-gray-700/50 pt-6">
-                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Connect with me</p>
+                  <p className="text-gray-800 hover:text-primary">Connect with me</p>
                   <div className="flex items-center space-x-4">
                     {socialLinks.map(({ icon: Icon, href, label, color }, index) => (
                       <motion.a
