@@ -112,7 +112,7 @@ const ArticlesSection: React.FC = () => {
           }}
         >
           <motion.div
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 p-4 md:p-8 relative z-[101] flex flex-col max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 p-4 md:p-8 relative z-[101] flex flex-col max-h-[90vh] overflow-y-auto mt-[56px] md:mt-0"
             initial={{ scale: 0.95, y: 40 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: 40 }}
