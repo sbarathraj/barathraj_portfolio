@@ -332,7 +332,7 @@ const ContactInfo: React.FC = () => {
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0 border-2 ${colorClass} animate-bounce-slow group-hover:scale-110 transition-transform`}>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0 border-2 ${colorClass} animate-jump group-hover:scale-110 transition-transform`}>
                   <Icon size={24} />
                 </div>
                 <div>

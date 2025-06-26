@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
                   transition={{ duration: 0.3, delay: 0.1 * index }}
                   viewport={{ once: true }}
                 >
-                  <item.icon className={`${item.color} animate-bounce-slow`} size={20} />
+                  <item.icon className={`${item.color} animate-jump`} size={20} />
                   <span className="text-gray-600">{item.text}</span>
                 </motion.div>
               ))}
@@ -157,7 +157,7 @@ const Footer: React.FC = () => {
                   viewport={{ once: true }}
                   style={{ minWidth: 44, minHeight: 44, willChange: 'transform, opacity' }}
                 >
-                  <Icon size={24} className="hover:animate-bounce-slow" />
+                  <Icon size={24} className="animate-jump" />
                 </motion.a>
               ))}
             </motion.div>

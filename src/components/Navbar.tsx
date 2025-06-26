@@ -64,6 +64,8 @@ const Navbar: React.FC = () => {
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
+    { id: 'articles', label: 'Articles' },
+    { id: 'coding', label: 'Coding' },
     { id: 'contact', label: 'Contact' }
   ];
 

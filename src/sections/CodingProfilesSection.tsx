@@ -140,7 +140,7 @@ const CodingProfileCard: React.FC<CodingProfileCardProps> = ({ profile, index })
       
       <div className="flex items-center mb-6 relative">
         <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${profile.gradient} flex items-center justify-center mr-4 shadow-lg`}>
-          <Icon size={28} className="text-white animate-bounce-slow" />
+          <Icon size={28} className="text-white animate-jump" />
         </div>
         <div>
           <h3 className={`text-xl font-bold bg-gradient-to-r ${profile.gradient} bg-clip-text text-transparent animate-gradient drop-shadow-md`}>

@@ -452,3 +452,15 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(-18%); }
+  40% { transform: translateY(-30%); }
+  60% { transform: translateY(-18%); }
+  80% { transform: translateY(0); }
+}
+
+.animate-jump {
+  animation: jump 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
