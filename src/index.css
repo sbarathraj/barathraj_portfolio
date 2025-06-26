@@ -46,10 +46,6 @@
     @apply bg-gray-800/30 border-gray-700/50;
   }
 
-  body.dark-mode nav {
-    @apply bg-gray-800/30 border-gray-700/30;
-  }
-
   body.dark-mode .text-gray-600 {
     @apply text-gray-300;
   }
@@ -136,6 +132,14 @@
     @apply bg-gray-700/40;
   }
 
+  body.dark-mode .bg-white\/80 {
+    @apply bg-gray-900/80;
+  }
+
+  body.dark-mode .bg-white\/95 {
+    @apply bg-gray-900/95;
+  }
+
   body.dark-mode .hover\:bg-white\/20:hover {
     @apply bg-gray-600/30;
   }
@@ -170,6 +174,18 @@
 
   body.dark-mode .border-accent\/70 {
     @apply border-accent/80;
+  }
+
+  body.dark-mode .border-gray-200\/50 {
+    @apply border-gray-700/50;
+  }
+
+  body.dark-mode .bg-gray-100\/50 {
+    @apply bg-gray-800/50;
+  }
+
+  body.dark-mode .hover\:bg-gray-200\/50:hover {
+    @apply bg-gray-700/50;
   }
 }
 
@@ -251,6 +267,47 @@
   .professional-button-outline:hover::before {
     @apply opacity-10;
   }
+
+  /* Continue.dev inspired navbar styles */
+  .navbar-glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .dark-mode .navbar-glass {
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-item {
+    @apply relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200;
+  }
+
+  .nav-item:hover {
+    @apply bg-gray-100/50 dark:bg-gray-800/50;
+  }
+
+  .nav-item.active {
+    @apply text-primary bg-primary/10;
+  }
+
+  .mobile-menu-panel {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark-mode .mobile-menu-panel {
+    background: rgba(17, 24, 39, 0.95);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* Animation utilities */
@@ -317,4 +374,81 @@
 /* Prevent FOUC (Flash of Unstyled Content) */
 html.loading * {
   transition: none !important;
+}
+
+/* Continue.dev inspired animations */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-in-top {
+  animation: slideInFromTop 0.3s ease-out;
+}
+
+.fade-in-scale {
+  animation: fadeInScale 0.2s ease-out;
+}
+
+/* Enhanced smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Improved focus styles for accessibility */
+.focus-ring:focus-visible {
+  @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .navbar-glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  .mobile-menu-panel {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .navbar-glass {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark-mode .navbar-glass {
+    background: rgba(17, 24, 39, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
