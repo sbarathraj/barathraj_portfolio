@@ -56,11 +56,11 @@ const AboutSection: React.FC = () => {
 
   const handleResumeDownload = () => {
     try {
-      window.open('https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk', '_blank', 'noopener,noreferrer');
+      window.open('https://drive.google.com/file/d/1IX8-T2bqinDzhcXRr0mMYashUHfNahAV/view?usp=sharing', '_blank', 'noopener,noreferrer');
     } catch (error) {
       console.error('Error opening resume:', error);
       // Fallback: try direct navigation
-      window.location.href = 'https://drive.google.com/file/d/1Ie0ZVMyh7M3-kYIdmyZ-TfL7z5ardd_a/view?usp=drivesdk';
+      window.location.href = 'https://drive.google.com/file/d/1IX8-T2bqinDzhcXRr0mMYashUHfNahAV/view?usp=sharing';
     }
   };
 
