@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, ExternalLink, Github, Award, TrendingUp, ArrowRight } from 'lucide-react';
+import { Code, Github, Award, TrendingUp, ArrowRight } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading } from '../components/AnimatedText';
 import useScrollAnimation from '../hooks/useScrollAnimation';

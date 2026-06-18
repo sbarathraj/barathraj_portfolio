@@ -23,8 +23,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     if (inView) {
       controls.start('visible');
       
-      // Animate counter
-      let start = 0;
       const end = percentage;
       const duration = 1500;
       const startTime = Date.now();

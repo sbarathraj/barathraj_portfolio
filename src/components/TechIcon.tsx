@@ -18,7 +18,6 @@ import {
   FileCode,
   Blocks,
   Braces,
-  Terminal,
   Globe,
   Layers
 } from 'lucide-react';

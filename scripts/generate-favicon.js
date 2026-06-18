@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const source = "https://ik.imagekit.io/barthraj/barathrajcoat.jpg?updatedAt=1748329958725"; // Source image
+const source = "https://res.cloudinary.com/dltti9hiw/image/upload/v1781804262/Gemini_Generated_Image_61qmy561qmy561qm_opc41j.png"; // Source image
 const configuration = {
     path: "/", // Path for generated files
     appName: "Barathraj S Portfolio",

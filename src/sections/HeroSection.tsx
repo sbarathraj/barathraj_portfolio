@@ -5,7 +5,7 @@ import { ArrowDown, Github, Linkedin, Twitter, Youtube, Instagram, ArrowRight, C
 import { useSection } from '../context/SectionContext';
 import ParticleBackground from '../components/ParticleBackground';
 import ShineButton from '../components/ShineButton';
-// @ts-ignore: No types for react-typed
+// @ts-expect-error: No types for react-typed
 import { ReactTyped as Typed } from 'react-typed';
 
 const socialLinks = [
@@ -83,18 +83,6 @@ const nameTextAnimation = {
     transition: {
       duration: 0.8,
       ease: [0.4, 0, 0.2, 1]
-    }
-  }
-};
-
-const glowAnimation = {
-  initial: { opacity: 0.5 },
-  animate: {
-    opacity: [0.5, 1, 0.5],
-    transition: {
-      duration: 2,
-      repeat: Infinity,
-      ease: "easeInOut"
     }
   }
 };

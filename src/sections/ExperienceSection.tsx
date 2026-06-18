@@ -23,7 +23,7 @@ const education = {
 
 const experiences = [
   {
-    company: 'Kuwy Technology Service Pvt Ltd',
+    company: 'Kuwy Technology Service Private Limited',
     role: 'Software Engineer',
     period: 'June 2024 – Present',
     location: 'Chennai, Tamil Nadu',
@@ -31,13 +31,13 @@ const experiences = [
     description:
       'At Kuwy, I work as a Software Engineer in a fast-paced fintech environment. I collaborate with cross-functional teams to design, develop, and optimize enterprise applications that support digital vehicle finance processes.',
     contributions: [
-      'Designed high-performance backend systems using Java, Spring Boot, and MySQL to handle secure and large-scale transactions.',
-      'Developed and maintained RESTful APIs, significantly improving data exchange efficiency and system scalability.',
-      'Improved backend reliability through caching strategies, query optimization, and load balancing under high traffic conditions.',
-      'Created dynamic and responsive user interfaces with AngularJS and Bootstrap to enhance customer experience.',
-      'Integrated dashboards and real-time data visualizations, improving operational transparency and monitoring.',
-      'Implemented robust authentication, rate limiting, and encryption strategies for data privacy and security compliance.',
-      'Participated in agile development cycles, regularly contributing to code reviews, sprint planning, and cross-team collaboration.',
+      'Architected Banking Loan processing APIs via Java 8 and Spring Boot, enforcing MVC architecture for financial data.',
+      'Developed backend microservices integrating secure REST APIs (Aadhar, PAN, Vehicle) for robust validation.',
+      'Engineered 20+ scalable RESTful APIs via Spring Boot and Hibernate, improving system data persistence.',
+      'Automated generation of .xlsx/.csv enterprise reports via Apache POI for streamlined Excel data reconciliation.',
+      'Boosted system performance by 30% using caching and circuit breaker patterns for enhanced system reliability.',
+      'Deployed on AWS utilizing Application Load Balancer (ALB) and Auto Scaling groups for high availability.',
+      'Built responsive Bootstrap 5 UIs and real-time AngularJS dashboards to consume frontend REST APIs efficiently.',
     ],
   },
   {

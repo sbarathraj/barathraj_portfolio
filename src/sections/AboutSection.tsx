@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FileDown, Award, Code, Sparkles, Brain, Rocket } from 'lucide-react';
+import { FileDown, Award, Code } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 import { AnimatedHeading, AnimatedParagraph } from '../components/AnimatedText';
-import useScrollAnimation from '../hooks/useScrollAnimation';
 
 // Animation variants
 const floatingAnimation = {
@@ -43,10 +42,22 @@ const rotateAnimation = {
   }
 };
 
+const getExperienceYears = () => {
+  const startDate = new Date('2024-06-01');
+  const today = new Date();
+  let years = today.getFullYear() - startDate.getFullYear();
+  const monthDiff = today.getMonth() - startDate.getMonth();
+  
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < startDate.getDate())) {
+    years--;
+  }
+  
+  return `${years}+ Year${years !== 1 ? 's' : ''}`;
+};
+
 const AboutSection: React.FC = () => {
   const { setActiveSection } = useSection();
   const [sectionRef, inView] = useInView({ threshold: 0.3 });
-  const imageCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (inView) {
@@ -56,11 +67,11 @@ const AboutSection: React.FC = () => {
 
   const handleResumeDownload = () => {
     try {
-      window.open('https://drive.google.com/file/d/1PxZPYQBdLb-hCWBw36yQ5K6w2EgBjxG8/view?usp=sharing', '_blank', 'noopener,noreferrer');
+      window.open('https://drive.google.com/file/d/1EUWe06Q5lnxbhNGSW09tsSpA9CIAZu1J/view?usp=drive_link', '_blank', 'noopener,noreferrer');
     } catch (error) {
       console.error('Error opening resume:', error);
       // Fallback: try direct navigation
-      window.location.href = 'https://drive.google.com/file/d/1PxZPYQBdLb-hCWBw36yQ5K6w2EgBjxG8/view?usp=sharing';
+      window.location.href = 'https://drive.google.com/file/d/1EUWe06Q5lnxbhNGSW09tsSpA9CIAZu1J/view?usp=drive_link';
     }
   };
 
@@ -185,7 +196,7 @@ const AboutSection: React.FC = () => {
                   className="relative w-full h-full overflow-hidden rounded-2xl border border-white/10 shadow-lg bg-gradient-to-b from-gray-900/10 to-black/30"
                 >
                   <img
-                    src="https://ik.imagekit.io/barthraj/barathrajcoat.jpg?updatedAt=1748329958725"
+                    src="https://res.cloudinary.com/dltti9hiw/image/upload/v1781804262/Gemini_Generated_Image_61qmy561qmy561qm_opc41j.png"
                     alt="Barathraj S"
                     className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
                     loading="eager"
@@ -228,7 +239,7 @@ const AboutSection: React.FC = () => {
                     initial="initial"
                     animate="animate"
                   >
-                    1+ Year
+                    {getExperienceYears()}
                   </motion.div>
                   <div className="text-sm text-gray-600">Professional Experience</div>
                 </motion.div>
@@ -256,7 +267,7 @@ const AboutSection: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   <AnimatedParagraph
-                    text="With expertise in Java, Spring Boot, and Angular, I focus on creating scalable applications that deliver exceptional user experiences. I'm currently working as a Software Engineer at Kuwy Technology Service Pvt Ltd."
+                    text="With expertise in Java, Spring Boot, and Angular, I focus on creating scalable applications that deliver exceptional user experiences. I'm currently working as a Software Engineer at Kuwy Technology Service Private Limited."
                     className="text-lg text-gray-600 leading-relaxed"
                     delay={0.2}
                   />

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const imageUrl = 'https://ik.imagekit.io/barthraj/barathrajcoat.jpg';
+const imageUrl = 'https://res.cloudinary.com/dltti9hiw/image/upload/v1781804262/Gemini_Generated_Image_61qmy561qmy561qm_opc41j.png';
 const outputPath = path.resolve(__dirname, '../public/images/profile.jpg');
 
 console.log('Downloading image...');

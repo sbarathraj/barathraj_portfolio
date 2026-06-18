@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Instagram, Twitter, Youtube, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Instagram, Twitter, Youtube, Sun, Moon } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
 
 const navItems = [
@@ -12,6 +12,17 @@ const navItems = [
   { id: 'articles', label: 'Articles' },
   { id: 'coding', label: 'Coding' },
   { id: 'contact', label: 'Contact' },
+];
+
+const sections = [
+  { id: 'hero', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'articles', label: 'Articles' },
+  { id: 'coding', label: 'Coding' },
+  { id: 'contact', label: 'Contact' }
 ];
 
 const socialLinks = [
@@ -57,17 +68,6 @@ const Navbar: React.FC = () => {
   const lastScrollY = useRef(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const sections = [
-    { id: 'hero', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'articles', label: 'Articles' },
-    { id: 'coding', label: 'Coding' },
-    { id: 'contact', label: 'Contact' }
-  ];
 
   // Initialize theme on mount
   useEffect(() => {

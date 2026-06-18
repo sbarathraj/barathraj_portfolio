@@ -147,7 +147,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, isSelected, o
       variants={variants.fadeInUp}
       initial="hidden"
       animate={controls}
-      className="card-3d glass-effect p-0 border-2 border-primary/20 shadow-lg rounded-xl hover:shadow-glow transition-all duration-300 group"
+      className={`card-3d glass-effect p-0 border-2 shadow-lg rounded-xl hover:shadow-glow transition-all duration-300 group ${
+        isSelected ? 'border-primary shadow-glow' : 'border-primary/20'
+      }`}
       whileHover={{ scale: 1.05, rotateY: 8, rotateX: 8 }}
       whileTap={{ scale: 0.97, boxShadow: '0 0 0 4px var(--primary)' }}
       style={{ willChange: 'transform, opacity', minWidth: 44, minHeight: 44 }}

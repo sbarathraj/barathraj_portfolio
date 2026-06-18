@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useAnimation, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Database, Cloud, GitBranch, Brain, Settings } from 'lucide-react';
 import { useSection } from '../context/SectionContext';
