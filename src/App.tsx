@@ -11,6 +11,7 @@ import ContactSection from './sections/ContactSection';
 import ArticlesSection from './sections/ArticlesSection';
 import CodingProfilesSection from './sections/CodingProfilesSection';
 import Footer from './components/Footer';
+import PortfolioChat from './components/PortfolioChat';
 import { SectionProvider } from './context/SectionContext';
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
           </AnimatePresence>
 
           <Footer />
+          <PortfolioChat />
         </motion.main>
       </div>
     </SectionProvider>
