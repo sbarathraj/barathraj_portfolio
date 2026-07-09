@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Loader2, Sparkles } from 'lucide-react';
+import { MessageSquare, X, Send, Loader2, Sparkles, RotateCcw } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const systemPrompt = `You are a professional AI Assistant representing Barathraj S on his portfolio website.
 Your objective is to answer questions ONLY about Barathraj S's professional details, work experience, projects, skills, education, and contact information.
@@ -78,6 +79,7 @@ interface Message {
 const MarkdownText: React.FC<{ text: string; isDarkMode: boolean }> = ({ text, isDarkMode }) => {
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       components={{
         p: ({ children }) => (
           <p className={`mb-1.5 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -124,6 +126,37 @@ const MarkdownText: React.FC<{ text: string; isDarkMode: boolean }> = ({ text, i
             {children}
           </h3>
         ),
+        table: ({ children }) => (
+          <div className="overflow-x-auto my-3 w-full rounded-lg border border-slate-200/60 dark:border-slate-800/60">
+            <table className="w-full border-collapse text-left text-xs sm:text-sm">
+              {children}
+            </table>
+          </div>
+        ),
+        thead: ({ children }) => (
+          <thead className={isDarkMode ? 'bg-slate-800/40 border-b border-slate-800/80' : 'bg-slate-50 border-b border-slate-200'}>
+            {children}
+          </thead>
+        ),
+        tr: ({ children }) => (
+          <tr className={`border-b last:border-b-0 ${isDarkMode ? 'border-slate-800/80 hover:bg-slate-800/20' : 'border-slate-200 hover:bg-slate-50/50'}`}>
+            {children}
+          </tr>
+        ),
+        th: ({ children }) => (
+          <th className={`px-3 py-2.5 font-bold border-r last:border-r-0 ${
+            isDarkMode ? 'border-slate-800/80 text-slate-100' : 'border-slate-200 text-slate-900'
+          }`}>
+            {children}
+          </th>
+        ),
+        td: ({ children }) => (
+          <td className={`px-3 py-2 border-r last:border-r-0 ${
+            isDarkMode ? 'border-slate-800/80 text-slate-300' : 'border-slate-200 text-slate-700'
+          }`}>
+            {children}
+          </td>
+        ),
       }}
     >
       {text}
@@ -134,12 +167,22 @@ const MarkdownText: React.FC<{ text: string; isDarkMode: boolean }> = ({ text, i
 const PortfolioChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Hi there! I'm Barathraj's Assistant. I can help answer questions about his experience, education, projects, skills, or contact info. Ask me anything!",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const stored = localStorage.getItem('portfolio_chat_messages');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.error('Failed to load chat history:', e);
+    }
+    return [
+      {
+        role: 'assistant',
+        content: "Hi there! I'm Barathraj's Assistant. I can help answer questions about his experience, education, projects, skills, or contact info. Ask me anything!",
+      },
+    ];
+  });
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -160,6 +203,32 @@ const PortfolioChat: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Persist chat history to localStorage whenever messages change
+  useEffect(() => {
+    try {
+      localStorage.setItem('portfolio_chat_messages', JSON.stringify(messages));
+    } catch (e) {
+      console.error('Failed to save chat history:', e);
+    }
+  }, [messages]);
+
+  const handleResetChat = () => {
+    if (window.confirm('Are you sure you want to clear your chat history?')) {
+      const defaultGreeting: Message[] = [
+        {
+          role: 'assistant',
+          content: "Hi there! I'm Barathraj's Assistant. I can help answer questions about his experience, education, projects, skills, or contact info. Ask me anything!",
+        },
+      ];
+      setMessages(defaultGreeting);
+      try {
+        localStorage.removeItem('portfolio_chat_messages');
+      } catch (e) {
+        console.error('Failed to clear chat history:', e);
+      }
+    }
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -385,17 +454,31 @@ const PortfolioChat: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-                  isDarkMode
-                    ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
-                    : 'bg-black/5 text-slate-600 hover:text-black hover:bg-black/10'
-                }`}
-                aria-label="Close chat"
-              >
-                <X size={16} />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleResetChat}
+                  title="Reset Chat"
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                    isDarkMode
+                      ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                      : 'bg-black/5 text-slate-600 hover:text-black hover:bg-black/10'
+                  }`}
+                  aria-label="Reset chat"
+                >
+                  <RotateCcw size={15} />
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                    isDarkMode
+                      ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                      : 'bg-black/5 text-slate-600 hover:text-black hover:bg-black/10'
+                  }`}
+                  aria-label="Close chat"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             </div>
 
             {/* Message Area */}

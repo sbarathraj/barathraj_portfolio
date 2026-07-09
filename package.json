@@ -24,6 +24,7 @@
     "react-markdown": "^10.1.0",
     "react-tsparticles": "^2.12.2",
     "react-typed": "^2.0.12",
+    "remark-gfm": "^4.0.1",
     "three": "^0.162.0",
     "tsparticles": "^2.12.0"
   },
