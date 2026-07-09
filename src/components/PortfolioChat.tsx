@@ -133,7 +133,7 @@ const MarkdownText: React.FC<{ text: string; isDarkMode: boolean }> = ({ text, i
 
 const PortfolioChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(document.body.classList.contains('dark-mode'));
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -147,6 +147,8 @@ const PortfolioChat: React.FC = () => {
 
   // Monitor document.body class changes to dynamically toggle light/dark modes
   useEffect(() => {
+    setIsDarkMode(document.body.classList.contains('dark-mode'));
+
     const observer = new MutationObserver(() => {
       setIsDarkMode(document.body.classList.contains('dark-mode'));
     });
@@ -343,16 +345,16 @@ const PortfolioChat: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className={`w-[calc(100vw-2rem)] sm:w-[440px] h-[400px] max-h-[calc(100vh-100px)] border rounded-2xl flex flex-col shadow-2xl overflow-hidden mb-4 backdrop-blur-xl transition-colors duration-300 ${
-              isDarkMode ? 'bg-slate-950/95 border-white/10' : 'bg-white/95 border-black/10'
+            className={`w-[calc(100vw-2rem)] sm:w-[440px] h-[400px] max-h-[calc(100vh-100px)] border rounded-2xl flex flex-col shadow-2xl overflow-hidden mb-4 backdrop-blur-xl transition-all duration-300 ${
+              isDarkMode
+                ? 'bg-[#0f172a]/95 border-slate-800 text-slate-100 shadow-teal-950/20'
+                : 'bg-white/95 border-slate-200 text-slate-800 shadow-slate-300/40'
             }`}
           >
             {/* Header */}
             <div
               className={`p-4 border-b flex items-center justify-between transition-colors duration-300 ${
-                isDarkMode
-                  ? 'bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 border-white/10'
-                  : 'bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 border-black/10'
+                isDarkMode ? 'bg-[#1e293b]/90 border-slate-800' : 'bg-slate-50 border-slate-200'
               }`}
             >
               <div className="flex items-center gap-2.5">
@@ -360,19 +362,25 @@ const PortfolioChat: React.FC = () => {
                   <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary via-secondary to-accent flex items-center justify-center shadow-lg">
                     <Sparkles className="text-white w-4.5 h-4.5" />
                   </div>
-                  <div className={`absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 ${
-                    isDarkMode ? 'border-slate-950' : 'border-white'
-                  }`} />
+                  <div
+                    className={`absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 ${
+                      isDarkMode ? 'border-[#1e293b]' : 'border-white'
+                    }`}
+                  />
                 </div>
                 <div>
-                  <h3 className={`font-bold text-sm leading-none mb-1 transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3
+                    className={`font-bold text-sm leading-none mb-1 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}
+                  >
                     BarathAI Lite
                   </h3>
-                  <p className={`text-xs transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                  }`}>
+                  <p
+                    className={`text-xs transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                    }`}
+                  >
                     Ask about Barathraj
                   </p>
                 </div>
@@ -381,8 +389,8 @@ const PortfolioChat: React.FC = () => {
                 onClick={() => setIsOpen(false)}
                 className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                   isDarkMode
-                    ? 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
-                    : 'bg-black/5 text-gray-600 hover:text-black hover:bg-black/10'
+                    ? 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                    : 'bg-black/5 text-slate-600 hover:text-black hover:bg-black/10'
                 }`}
                 aria-label="Close chat"
               >
@@ -395,14 +403,12 @@ const PortfolioChat: React.FC = () => {
               {messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 shadow-md transition-all duration-300 ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 shadow-sm transition-all duration-300 rounded-tl-none border ${
                       msg.role === 'user'
                         ? 'bg-gradient-to-r from-primary to-secondary text-white rounded-tr-none'
-                        : `rounded-tl-none border ${
-                            isDarkMode
-                              ? 'bg-white/5 border-white/5 text-gray-200'
-                              : 'bg-gray-100 border-gray-200 text-gray-800'
-                          }`
+                        : isDarkMode
+                          ? 'bg-[#1e293b] border-slate-800 text-slate-200'
+                          : 'bg-slate-100 border-slate-200 text-slate-800'
                     }`}
                   >
                     {msg.role === 'user' ? (
@@ -415,9 +421,13 @@ const PortfolioChat: React.FC = () => {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className={`rounded-2xl rounded-tl-none px-4 py-3 flex items-center gap-2 shadow-md border transition-all duration-300 ${
-                    isDarkMode ? 'bg-white/5 border-white/5 text-gray-200' : 'bg-gray-100 border-gray-200 text-gray-800'
-                  }`}>
+                  <div
+                    className={`rounded-2xl rounded-tl-none px-4 py-3 flex items-center gap-2 shadow-sm border transition-all duration-300 ${
+                      isDarkMode
+                        ? 'bg-[#1e293b] border-slate-800 text-slate-200'
+                        : 'bg-slate-100 border-slate-200 text-slate-800'
+                    }`}
+                  >
                     <Loader2 size={16} className="animate-spin text-primary" />
                     <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                       Assistant is thinking...
@@ -432,7 +442,7 @@ const PortfolioChat: React.FC = () => {
             <form
               onSubmit={handleSubmit}
               className={`p-3 border-t flex gap-2 transition-colors duration-300 ${
-                isDarkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-black/10'
+                isDarkMode ? 'bg-[#1e293b] border-slate-800' : 'bg-slate-50 border-slate-200'
               }`}
             >
               <input
@@ -443,8 +453,8 @@ const PortfolioChat: React.FC = () => {
                 disabled={isLoading}
                 className={`flex-1 rounded-xl px-4 py-2.5 text-sm transition-all focus:outline-none focus:border-primary disabled:opacity-50 ${
                   isDarkMode
-                    ? 'bg-white/5 border-white/10 text-white placeholder-gray-400 focus:bg-white/10'
-                    : 'bg-white border-black/10 text-gray-900 placeholder-gray-500 focus:bg-gray-50'
+                    ? 'bg-[#0f172a] border-slate-800 text-white placeholder-slate-500 focus:bg-[#0f172a]/80'
+                    : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white'
                 }`}
               />
               <button
